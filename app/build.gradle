@@ -104,6 +104,13 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:$camerax_version"
 
-    //accompanist permission
+    //accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
     implementation "com.google.accompanist:accompanist-permissions:0.23.1"
+
+    //Room
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
 }

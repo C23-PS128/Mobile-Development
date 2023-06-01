@@ -4,10 +4,10 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.History
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.QrCodeScanner
+import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -25,16 +25,18 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.get
 import androidx.navigation.navArgument
-import com.bangkit.capstone.beangreader.ui.navigation.NavigationItem
-import com.bangkit.capstone.beangreader.ui.navigation.Screen
-import com.bangkit.capstone.beangreader.ui.screen.authentication.LoginScreen
-import com.bangkit.capstone.beangreader.ui.screen.authentication.RegisterScreen
-import com.bangkit.capstone.beangreader.ui.screen.detail.DetailScreen
-import com.bangkit.capstone.beangreader.ui.screen.history.HistoryScreen
-import com.bangkit.capstone.beangreader.ui.screen.home.HomeScreen
-import com.bangkit.capstone.beangreader.ui.screen.profile.ProfileScreen
-import com.bangkit.capstone.beangreader.ui.screen.scan.ScanScreen
-import com.bangkit.capstone.beangreader.ui.screen.setting.SettingScreen
+import com.bangkit.capstone.beangreader.presentation.navigation.NavigationItem
+import com.bangkit.capstone.beangreader.presentation.navigation.Screen
+import com.bangkit.capstone.beangreader.presentation.screen.authentication.LoginScreen
+import com.bangkit.capstone.beangreader.presentation.screen.authentication.RegisterScreen
+import com.bangkit.capstone.beangreader.presentation.screen.detail.DetailScreen
+import com.bangkit.capstone.beangreader.presentation.screen.favorite.FavoriteScreen
+import com.bangkit.capstone.beangreader.presentation.screen.history.HistoryScreen
+import com.bangkit.capstone.beangreader.presentation.screen.home.HomeScreen
+import com.bangkit.capstone.beangreader.presentation.screen.myprofile.MyProfileScreen
+import com.bangkit.capstone.beangreader.presentation.screen.profile.ProfileScreen
+import com.bangkit.capstone.beangreader.presentation.screen.scan.ScanScreen
+import com.bangkit.capstone.beangreader.presentation.screen.setting.SettingScreen
 
 @Composable
 fun BeanGreaderApp(
@@ -85,15 +87,25 @@ fun BeanGreaderApp(
                 )
             }
             composable(Screen.Scan.route) {
-                ScanScreen()
+                ScanScreen(
+                    onCloseClick = {
+                        navController.navigateUp()
+                    }
+                )
             }
             composable(Screen.History.route) {
                 HistoryScreen()
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(
+                    onClickMyProfile = {
+                        navController.navigate(Screen.MyProfile.route)
+                    },
                     onClickSetting = {
                         navController.navigate(Screen.Setting.route)
+                    },
+                    onClickFavorite = {
+                        navController.navigate(Screen.Favorite.route)
                     }
                 )
             }
@@ -102,6 +114,23 @@ fun BeanGreaderApp(
                 SettingScreen(
                     onLanguageClick = {
                         navController.context.startActivity(intent)
+                    },
+                    onBackClick = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable(Screen.Favorite.route) {
+                FavoriteScreen(
+                    onBackClick = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable(Screen.MyProfile.route) {
+                MyProfileScreen(
+                    onBackClick = {
+                        navController.navigateUp()
                     }
                 )
             }
@@ -133,25 +162,25 @@ fun BottomBar(
        val items = listOf(
            NavigationItem(
                title = stringResource(R.string.home),
-               icon = Icons.Outlined.Home,
+               icon = Icons.Default.Home,
                contentScreen = Screen.Home,
                contentDescription = "home_page"
            ),
            NavigationItem(
                title = stringResource(R.string.scan),
-               icon = Icons.Outlined.QrCodeScanner,
+               icon = Icons.Default.QrCodeScanner,
                contentScreen = Screen.Scan,
                contentDescription = "scan_page"
            ),
            NavigationItem(
                title = stringResource(R.string.history),
-               icon = Icons.Outlined.History,
+               icon = Icons.Default.History,
                contentScreen = Screen.History,
                contentDescription = "history_page"
            ),
            NavigationItem(
                title = stringResource(R.string.profile),
-               icon = Icons.Outlined.Person,
+               icon = Icons.Default.Person,
                contentScreen = Screen.Profile,
                contentDescription = "profile_page"
            )
@@ -185,7 +214,6 @@ fun BottomBar(
 private fun String?.shouldShowButtonAppBar(): Boolean {
     return this in setOf(
         Screen.Home.route,
-        Screen.Scan.route,
         Screen.History.route,
         Screen.Profile.route
     )

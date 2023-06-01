@@ -2,6 +2,7 @@ buildscript {
     ext{
         hilt_version = '2.46.1'
         camerax_version = "1.2.3"
+        room_version = '2.5.1'
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"

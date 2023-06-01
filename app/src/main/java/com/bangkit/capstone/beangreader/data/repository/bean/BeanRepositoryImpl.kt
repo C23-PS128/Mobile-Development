@@ -1,6 +1,6 @@
 package com.bangkit.capstone.beangreader.data.repository.bean
 
-import com.bangkit.capstone.beangreader.data.local.datastore.SettingPreferencesImpl
+import com.bangkit.capstone.beangreader.data.local.room.FavoriteDao
 import com.bangkit.capstone.beangreader.model.bean.Bean
 import com.bangkit.capstone.beangreader.model.bean.BeanData
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BeanRepositoryImpl @Inject constructor(private val settingPreferences: SettingPreferencesImpl) : BeanRepository {
+class BeanRepositoryImpl @Inject constructor(private val favoriteDao: FavoriteDao) : BeanRepository {
     private val bean = mutableListOf<Bean>()
 
     init {
@@ -28,5 +28,13 @@ class BeanRepositoryImpl @Inject constructor(private val settingPreferences: Set
 
     override fun getBeanById(id: Int): Flow<Bean> {
         return flowOf(bean.first { it.id == id})
+    }
+
+    override fun isFavorite(id: Int) {
+        favoriteDao.isFavorite(id)
+    }
+
+    override suspend fun deleteFavorite(id: Int) {
+        favoriteDao.delete(id)
     }
 }

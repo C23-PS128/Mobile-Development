@@ -7,4 +7,8 @@ interface BeanRepository {
     fun searchBean(query: String): Flow<List<Bean>>
 
     fun getBeanById(id: Int): Flow<Bean>
+
+    fun isFavorite(id: Int)
+
+    suspend fun deleteFavorite(id: Int)
 }
