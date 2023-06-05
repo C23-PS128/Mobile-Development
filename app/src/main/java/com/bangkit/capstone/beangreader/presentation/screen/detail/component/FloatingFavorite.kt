@@ -35,7 +35,7 @@ fun FloatingFavorite(
 fun FloatingFavoritePreview() {
     BeanGreaderTheme {
         FloatingFavorite(
-            isFav = true,
+            isFav = false,
             onFavClick = { /*TODO*/ }
         )
     }

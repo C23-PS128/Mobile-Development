@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.presentation.screen.myprofile.component.ListMenuItem
+import com.bangkit.capstone.beangreader.presentation.screen.myprofile.component.LogoutButton
 
 @Composable
 fun MyProfileScreen(
@@ -68,8 +69,14 @@ fun MyProfileContent(
                     .size(148.dp)
             )
             ListMenuItem(
-                title = "name",
-                text = {
+                overLineContent = {
+                    Text(
+                        text = stringResource(R.string.my_name),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                },
+                headlineContent = {
                     Text(
                         text = "John Wick",
                         style = MaterialTheme.typography.titleMedium
@@ -77,8 +84,14 @@ fun MyProfileContent(
                 },
             )
             ListMenuItem(
-                title = "email",
-                text = {
+                overLineContent = {
+                    Text(
+                        text = stringResource(R.string.my_email),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                },
+                headlineContent = {
                     Text(
                         text = "johnwick@gmail.com",
                         style = MaterialTheme.typography.titleMedium
@@ -86,13 +99,23 @@ fun MyProfileContent(
                 },
             )
             ListMenuItem(
-                title = "phone",
-                text = {
+                overLineContent = {
+                    Text(
+                        text = stringResource(R.string.my_phone),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                },
+                headlineContent = {
                     Text(
                         text = "083217382931",
                         style = MaterialTheme.typography.titleMedium
                     )
                 },
+            )
+            LogoutButton(
+                onClick = {},
+                modifier = Modifier.padding(vertical = 16.dp)
             )
         }
     }

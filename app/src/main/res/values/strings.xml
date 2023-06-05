@@ -12,10 +12,10 @@
     <string name="register">Register</string>
     <string name="sign_in">Sign in</string>
     <string name="login">Login</string>
-    <string name="or">OR</string>
+    <string name="or">or</string>
     <string name="connect_google">Connect with Google</string>
-    <string name="description_signup">Find out the quality of your coffee</string>
-    <string name="description_sign_in">Please login to continue using our app</string>
+    <string name="description_signup">To Find out the quality of your coffee</string>
+    <string name="description_sign_in">To continue using our app</string>
     <string name="forgot">Forgot Password?</string>
     <string name="need_account">Don\'t have an account yet?</string>
     <string name="have_account">Already have an account?</string>
@@ -24,7 +24,8 @@
     <string name="icon_person">Icon Person</string>
     <string name="icon_email">Icon Email</string>
     <string name="icon_password">Icon Password</string>
-    <string name="icon_eye">Icon Eye</string>
+    <string name="icon_visibility">Hide Password</string>
+    <string name="icon_visibilityOff">Show Password</string>
     <string name="icon_favorite">Icon Favorite</string>
     <string name="icon_setting">Icon Setting</string>
     <string name="icon_light">Icon Light Theme</string>
@@ -40,7 +41,16 @@
     <string name="favorite">Favorite</string>
     <string name="setting">Setting</string>
     <string name="logout">Logout</string>
+    <string name="about">About</string>
     <string name="theme">Theme</string>
     <string name="language">Select Language</string>
-    <string name="popular">Popular Coffee Beans</string>
+    <string name="type">Type Coffee Beans</string>
+    <string name="roast">Roast Coffee Beans</string>
+    <string name="brew">Brews Coffee</string>
+    <string name="drink">Popular Coffee Drinks</string>
+    <string name="my_name">name</string>
+    <string name="my_email">email</string>
+    <string name="my_phone">phone</string>
+    <string name="default_web_client_id" translatable="false">331033501530-hphqoh4bm26ti3ob21cav7vv7vt0invn.apps.googleusercontent.com</string>
+    <string name="about_application_description">\t \t \t Bean Greader is an innovative app that helps you easily and accurately detect and evaluate the quality of coffee beans. Using advanced image processing and data analysis technologies, Bean Greader can identify the physical and visual characteristics of coffee beans, such as size, shape, color, and consistency, thus providing comprehensive information on the quality and suitability of the beans. This app is suitable for coffee experts, coffee industry workers, or coffee lovers who want to get the best coffee beans for further processing or immediate enjoyment. Enjoy a deeper exploration of the world of coffee with Bean Greader.</string>
 </resources>

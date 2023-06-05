@@ -2,7 +2,6 @@ package com.bangkit.capstone.beangreader.presentation.screen.setting
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -64,8 +63,7 @@ fun SettingContent(
                 title = { Text(text = stringResource(R.string.setting)) },
                 navigationIcon = {
                     IconButton(
-                        onClick = onBackClick,
-                        modifier = Modifier.padding(start = 8.dp)
+                        onClick = onBackClick
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,

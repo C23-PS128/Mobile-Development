@@ -3,8 +3,8 @@ package com.bangkit.capstone.beangreader.presentation.screen.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bangkit.capstone.beangreader.data.repository.Result
 import com.bangkit.capstone.beangreader.data.repository.bean.BeanRepository
-import com.bangkit.capstone.beangreader.presentation.common.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,8 +20,12 @@ class HomeViewModel @Inject constructor(private val repository: BeanRepository) 
     val state = _state.asStateFlow()
 
     init {
-        searchBean("")
+        searchType("")
         addImageBanners()
+        getTypes()
+        getRoasts()
+        getBrews()
+        getDrinks()
     }
 
     fun onEvent(event: HomeEvent) {
@@ -32,12 +36,12 @@ class HomeViewModel @Inject constructor(private val repository: BeanRepository) 
                         query = event.query
                     )
                 }
-                searchBean(event.query)
+                searchType(event.query)
             }
         }
     }
 
-    private fun searchBean(newQuery: String) = viewModelScope.launch {
+    private fun searchType(newQuery: String) = viewModelScope.launch {
         repository.searchBean(newQuery)
             .catch { e ->
                 _state.update {
@@ -49,10 +53,86 @@ class HomeViewModel @Inject constructor(private val repository: BeanRepository) 
             .collect { beans ->
                 _state.update {
                     it.copy(
-                        listBean = beans
+                        listTypes = beans
                     )
                 }
             }
+    }
+
+    private fun getTypes() = viewModelScope.launch {
+        repository.getTypes().collect { result ->
+            when (result) {
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            errorMessage = result.message
+                        )
+                    }
+                }
+                is Result.Loading -> {}
+                is Result.Success -> {
+                    _state.update {
+                        it.copy(
+                            listTypes = result.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getRoasts() = viewModelScope.launch {
+        repository.getRoasts().collect { result ->
+            when (result) {
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            errorMessage = result.message
+                        )
+                    }
+                }
+                is Result.Loading -> {}
+                is Result.Success -> {
+                    _state.update {
+                        it.copy(
+                            listRoasts = result.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getBrews() = viewModelScope.launch {
+        repository.getBrews().collect { result ->
+            when (result) {
+                is Result.Error -> {}
+                is Result.Loading -> {}
+                is Result.Success -> {
+                    _state.update {
+                        it.copy(
+                            listBrews = result.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getDrinks() = viewModelScope.launch {
+        repository.getDrinks().collect { result ->
+            when (result) {
+                is Result.Error -> {}
+                is Result.Loading -> {}
+                is Result.Success -> {
+                    _state.update {
+                        it.copy(
+                            listDrinks = result.data
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun addImageBanners() {

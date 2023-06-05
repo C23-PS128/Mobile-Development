@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "505766495874",
+    "project_id": "c23-ps128",
+    "storage_bucket": "c23-ps128.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505766495874:android:29aeeb6b25e704f839969b",
+        "android_client_info": {
+          "package_name": "com.bangkit.capstone.beangreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505766495874-fhf6jshbt3pl1e849csu0j87b0od6for.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4bGWB46LpxJse3E10dBdmp55nAvdPXnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505766495874-fhf6jshbt3pl1e849csu0j87b0od6for.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

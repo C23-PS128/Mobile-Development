@@ -1,12 +1,14 @@
 package com.bangkit.capstone.beangreader.presentation.screen.profile
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
@@ -23,18 +25,19 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.presentation.screen.profile.component.ListMenu
-import com.bangkit.capstone.beangreader.presentation.screen.profile.component.LogoutButton
 
 @Composable
 fun ProfileScreen(
     onClickMyProfile: () -> Unit,
     onClickSetting: () -> Unit,
-    onClickFavorite: () -> Unit
+    onClickFavorite: () -> Unit,
+    onClickAbout: () -> Unit
 ) {
     ProfileContent(
         onClickMyProfile = onClickMyProfile,
         onClickSetting = onClickSetting,
-        onClickFavorite = onClickFavorite
+        onClickFavorite = onClickFavorite,
+        onClickAbout = onClickAbout
     )
 }
 
@@ -43,6 +46,7 @@ fun ProfileContent(
     onClickMyProfile: () -> Unit,
     onClickSetting: () -> Unit,
     onClickFavorite: () -> Unit,
+    onClickAbout: () -> Unit,
     modifier: Modifier = Modifier
     ) {
     Column(
@@ -66,17 +70,14 @@ fun ProfileContent(
         )
         Text(
             text = "jhonwick@gmail.com",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(bottom = 16.dp)
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         ListMenuProfile(
             onClickMyProfile = onClickMyProfile,
             onClickFavorite = onClickFavorite,
-            onClickSetting = onClickSetting
-        )
-        LogoutButton(
-            onClick = {}
+            onClickSetting = onClickSetting,
+            onClickAbout = onClickAbout
         )
     }
 }
@@ -86,7 +87,8 @@ fun ListMenuProfile(
     modifier: Modifier = Modifier,
     onClickMyProfile: () -> Unit,
     onClickFavorite: () -> Unit,
-    onClickSetting: () -> Unit
+    onClickSetting: () -> Unit,
+    onClickAbout: () -> Unit,
 ) {
     Column(modifier = modifier.padding(vertical = 16.dp)) {
         ListMenu(
@@ -118,6 +120,17 @@ fun ListMenuProfile(
                 )
             },
             onCLick = onClickSetting
+        )
+        Spacer(modifier = Modifier.padding(16.dp))
+        ListMenu(
+            onCLick = onClickAbout,
+            text = { Text(stringResource(R.string.about)) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = "Icon About"
+                )
+            }
         )
     }
 }

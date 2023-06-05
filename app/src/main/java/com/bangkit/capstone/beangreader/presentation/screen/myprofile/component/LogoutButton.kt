@@ -1,4 +1,4 @@
-package com.bangkit.capstone.beangreader.presentation.screen.profile.component
+package com.bangkit.capstone.beangreader.presentation.screen.myprofile.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height

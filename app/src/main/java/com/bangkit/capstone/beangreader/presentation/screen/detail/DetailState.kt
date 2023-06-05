@@ -1,9 +1,9 @@
 package com.bangkit.capstone.beangreader.presentation.screen.detail
 
-import com.bangkit.capstone.beangreader.model.bean.Bean
+import com.bangkit.capstone.beangreader.data.remote.response.article.DetailItem
 
 data class DetailState(
-    val bean: Bean? = null,
+    val detailResult: DetailItem? = null,
     val id: Int = 0,
     val isFav: Boolean = false,
     val isLoading: Boolean = false,

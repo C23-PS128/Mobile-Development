@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class FavoriteEntity(
     @PrimaryKey(autoGenerate = false)
     var id: Int = 0,
-    var name: String = "",
-    var description: String = "",
+    var title: String? = "",
+    var description: String? = "",
     var image: String? = null,
 )

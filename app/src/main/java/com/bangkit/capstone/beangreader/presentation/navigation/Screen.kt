@@ -11,7 +11,8 @@ sealed class Screen(val route: String) {
     object Setting: Screen("setting")
     object Favorite: Screen("favorite")
     object MyProfile: Screen("my_profile")
-    object Detail : Screen("home/{beanId}") {
-        fun createRoute(beanId: Int) = "home/$beanId"
+    object About: Screen("about")
+    object Detail : Screen("home/{beanId}/{type}") {
+        fun createRoute(beanId: Int, type: Int) = "home/$beanId/$type"
     }
 }

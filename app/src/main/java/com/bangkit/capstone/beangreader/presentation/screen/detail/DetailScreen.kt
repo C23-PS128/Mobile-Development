@@ -1,5 +1,6 @@
 package com.bangkit.capstone.beangreader.presentation.screen.detail
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,7 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -37,28 +40,29 @@ import com.bangkit.capstone.beangreader.ui.theme.BeanGreaderTheme
 @Composable
 fun DetailScreen(
     id: Int,
+    type: Int,
     viewModel: DetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit
 ) {
     LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(DetailEvent.GetDetail(id))
+        viewModel.onEvent(DetailEvent.GetDetailType(id, type))
     }
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-
-    state.bean?.let {
+    state.detailResult?.let {
         DetailContent(
-            urlImage = it.image,
-            title = it.title,
-            description = it.description,
+            urlImage = "${it.image}",
+            title = "${it.title}",
+            description = "${it.description}",
             isFav = state.isFav,
             onFavClick = {
-                viewModel.onEvent(DetailEvent.OnFavClick(state.isFav))
+                viewModel.onEvent(DetailEvent.OnFavClick(!state.isFav, state.detailResult))
             },
             navigateBack = navigateBack
-    )
+        )
     }
 }
+
 
 @Composable
 fun DetailContent(
@@ -68,9 +72,14 @@ fun DetailContent(
     isFav: Boolean,
     onFavClick: () -> Unit,
     navigateBack: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    scrollState: ScrollState = rememberScrollState()
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+    ) {
         Box(modifier = Modifier.height(264.dp)) {
             AsyncImage(
                 model = urlImage,
@@ -140,7 +149,7 @@ fun DetailScreenPreview() {
         DetailContent(
             urlImage = "",
             title = "Arabica",
-            description = "Lorem Ipsum",
+            description = "Lorem Ipsum jklhajjbfadjk afeihoeihfjb oihefoihoifeqhihpihefpihp oiehfoiefoi  oiheqfoihqeoifh oiqhefoihpeqofhpiiewhfou",
             isFav = true,
             onFavClick = { /*TODO*/ },
             navigateBack = { /*TODO*/ })

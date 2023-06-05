@@ -1,4 +1,4 @@
-package com.bangkit.capstone.beangreader.presentation.screen.authentication
+package com.bangkit.capstone.beangreader.presentation.screen.authentication.register
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,40 +10,52 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.RemoveRedEye
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.component.GoogleButton
-import com.bangkit.capstone.beangreader.presentation.screen.authentication.component.TextBox
+import com.bangkit.capstone.beangreader.presentation.screen.authentication.component.NormalTextField
+import com.bangkit.capstone.beangreader.presentation.screen.authentication.component.PasswordTextField
 import com.bangkit.capstone.beangreader.ui.theme.BeanGreaderTheme
 
 @Composable
 fun RegisterScreen(
     onRegisterClick: () -> Unit,
-    onSigInClick: () -> Unit
+    onSigInClick: () -> Unit,
+    viewModel: RegisterViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     RegisterContent(
-        urlImage = "",
-        text = "",
-        onValueChange = {},
+        name = state.name,
+        email = state.email,
+        password = state.password,
+        onNameChange = { name ->
+            viewModel.onEvent(RegisterEvent.OnNameChange(name))
+        },
+        onEmailChange = { email ->
+            viewModel.onEvent(RegisterEvent.OnEmailChange(email))
+        },
+        onPasswordChange = { password ->
+            viewModel.onEvent(RegisterEvent.OnPasswordChange(password))
+        },
         onRegisterClick = onRegisterClick,
         onSigInClick = onSigInClick
     )
@@ -52,9 +64,12 @@ fun RegisterScreen(
 @Composable
 fun RegisterContent(
     modifier: Modifier = Modifier,
-    urlImage: String,
-    text: String,
-    onValueChange: (String) -> Unit,
+    name: String,
+    email: String,
+    password: String,
+    onNameChange: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
     onRegisterClick: () -> Unit,
     onSigInClick: () -> Unit
 ) {
@@ -79,94 +94,38 @@ fun RegisterContent(
         )
         Text(
             text = stringResource(R.string.description_signup),
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .padding(top = 4.dp, bottom = 16.dp)
         )
-        TextBox(
-            text = text,
-            onValueChange = onValueChange,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = stringResource(R.string.icon_person)
-                )
-            },
-            label = {
-                Text(stringResource(R.string.name))
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp)
-        ) {}
-        TextBox(
-            text = text,
-            onValueChange = onValueChange,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.Email,
-                    contentDescription = stringResource(R.string.icon_email)
-                )
-            },
-            label = {
-                Text(stringResource(R.string.email))
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp)
-        ) {}
-        TextBox(
-            text = text,
-            onValueChange = onValueChange,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.Lock,
-                    contentDescription = stringResource(R.string.icon_password)
-                )
-            },
-            trailingIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        imageVector = Icons.Outlined.RemoveRedEye,
-                        contentDescription = stringResource(R.string.icon_eye),
-                    )
-                }
-            },
-            label = {
-                Text(stringResource(R.string.password))
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp)
+        NormalTextField(
+            value = name,
+            onValueChange = onNameChange,
+            imageVector = Icons.Outlined.Person,
+            contentDescription = stringResource(R.string.icon_person),
+            label = stringResource(R.string.name),
+            keyboardType = KeyboardType.Text
         )
-        TextBox(
-            text = text,
-            onValueChange = onValueChange,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.Lock,
-                    contentDescription = stringResource(R.string.icon_password)
-                )
-            },
-            trailingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.RemoveRedEye,
-                    contentDescription = stringResource(R.string.icon_eye)
-                )
-            },
-            label = {
-                Text(stringResource(R.string.confirm_password))
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
+        NormalTextField(
+            value = email,
+            onValueChange = onEmailChange,
+            imageVector = Icons.Outlined.Email,
+            contentDescription = stringResource(R.string.icon_email),
+            label = stringResource(R.string.email),
+            keyboardType = KeyboardType.Email
+        )
+        PasswordTextField(
+            text = password,
+            onValueChange = onPasswordChange,
+            label = stringResource(R.string.password)
         )
         Button(
             onClick = onRegisterClick,
-            shape = ShapeDefaults.Medium,
+            shape = MaterialTheme.shapes.large,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp)
+                .padding(top = 32.dp, bottom = 16.dp)
                 .height(48.dp)
         ) {
             Text(
@@ -176,17 +135,17 @@ fun RegisterContent(
         }
         Text(
             text = stringResource(R.string.or),
-            style = MaterialTheme.typography.labelMedium
+            style = MaterialTheme.typography.bodyMedium
         )
         GoogleButton(
             clicked = { /*TODO*/ },
             modifier = Modifier
-                .padding(vertical = 8.dp)
+                .padding(vertical = 16.dp)
                 .height(48.dp)
         )
         Row(
             modifier = Modifier,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(text = stringResource(R.string.have_account))
             TextButton(onClick = onSigInClick) {
