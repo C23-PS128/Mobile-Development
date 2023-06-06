@@ -19,6 +19,6 @@ We use MVVM (Model View ViewModel) design pattern with a Clean Architecture.
 * [Dagger Hilt]("https://developer.android.com/training/dependency-injection/hilt-android?hl=id")
 * [Camera X]("https://developer.android.com/training/camerax?hl=id")
 * [Room]("https://developer.android.com/training/data-storage/room?hl=id")
-*[Retrofit]("https://square.github.io/retrofit/")
+* [Retrofit]("https://square.github.io/retrofit/")
 * [Kotlin Flow]("https://developer.android.com/kotlin/flow?hl=id")
 * [Airbnb Lottie]("https://github.com/airbnb/lottie-android")
