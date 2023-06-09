@@ -5,9 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite")
 data class FavoriteEntity(
-    @PrimaryKey(autoGenerate = false)
     var id: Int = 0,
-    var title: String? = "",
+    var type: Int = 0,
+    @PrimaryKey
+    var title: String = "",
     var description: String? = "",
     var image: String? = null,
 )

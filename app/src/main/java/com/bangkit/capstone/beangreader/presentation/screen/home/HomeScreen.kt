@@ -26,25 +26,23 @@ import com.bangkit.capstone.beangreader.presentation.screen.home.component.ListB
 import com.bangkit.capstone.beangreader.presentation.screen.home.component.ListDrinkItem
 import com.bangkit.capstone.beangreader.presentation.screen.home.component.ListRoastsItem
 import com.bangkit.capstone.beangreader.presentation.screen.home.component.ListTypesItem
-import com.bangkit.capstone.beangreader.presentation.screen.home.component.SearchBar
+import com.bangkit.capstone.beangreader.presentation.screen.home.component.SearchBarView
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateToDetail: (Int, Int) -> Unit
+    navigateToSearch: () -> Unit,
+    navigateToDetail: (Int, String, Int) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     HomeContent(
-        query = state.query,
-        onQueryChange = { query ->
-            viewModel.onEvent(HomeEvent.OnQueryChange(query))
-        },
         typesItem = state.listTypes,
         roastsItem = state.listRoasts,
         brewsItem = state.listBrews,
         drinksItem = state.listDrinks,
+        navigateToSearch = navigateToSearch,
         navigateToDetail = navigateToDetail,
         bannerImages = state.listBannerImages,
         modifier = modifier
@@ -54,14 +52,13 @@ fun HomeScreen(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeContent(
-    query: String,
-    onQueryChange: (String) -> Unit,
     typesItem: List<TypeCoffeeItem>,
     roastsItem: List<RoastsItem>,
     brewsItem: List<BrewsItem>,
     drinksItem: List<DrinksItem>,
     bannerImages: List<String>,
-    navigateToDetail: (Int, Int) -> Unit,
+    navigateToSearch: () -> Unit,
+    navigateToDetail: (Int, String, Int) -> Unit,
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState()
 ) {
@@ -69,10 +66,10 @@ fun HomeContent(
         modifier = modifier
             .verticalScroll(scrollState)
     ) {
-        SearchBar(
-            query = query,
-            onQueryChange = onQueryChange,
-            modifier = Modifier.fillMaxWidth()
+        SearchBarView(
+            navigateToSearch = navigateToSearch,
+            modifier = Modifier
+                .fillMaxWidth()
         )
         ImageSlider(
             pagerImages = bannerImages
@@ -84,8 +81,8 @@ fun HomeContent(
         )
         ListTypesItem(
             typesItem = typesItem,
-            navigateToDetail = {
-                navigateToDetail(it, 0)
+            navigateToDetail = { id, title ->
+                navigateToDetail(id, title, 0)
             },
         )
         Text(
@@ -95,8 +92,8 @@ fun HomeContent(
         )
         ListRoastsItem(
             roastsItem = roastsItem,
-            navigateToDetail = {
-                navigateToDetail(it, 1)
+            navigateToDetail = { id, title ->
+                navigateToDetail(id, title, 1)
             }
         )
         Text(
@@ -106,8 +103,8 @@ fun HomeContent(
         )
         ListBrewsItem(
             brewsItem = brewsItem,
-            navigateToDetail = {
-                navigateToDetail(it, 2)
+            navigateToDetail = { id, title ->
+                navigateToDetail(id, title, 2)
             }
         )
         Text(
@@ -117,8 +114,8 @@ fun HomeContent(
         )
         ListDrinkItem(
             drinksItem = drinksItem,
-            navigateToDetail = {
-                navigateToDetail(it, 3)
+            navigateToDetail = { id, title ->
+                navigateToDetail(id, title, 3)
             }
         )
     }

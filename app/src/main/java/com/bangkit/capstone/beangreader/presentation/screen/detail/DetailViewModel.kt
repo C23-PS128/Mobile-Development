@@ -3,7 +3,7 @@ package com.bangkit.capstone.beangreader.presentation.screen.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.capstone.beangreader.data.local.entity.FavoriteEntity
-import com.bangkit.capstone.beangreader.data.repository.Result
+import com.bangkit.capstone.beangreader.domain.model.Result
 import com.bangkit.capstone.beangreader.data.repository.bean.BeanRepository
 import com.bangkit.capstone.beangreader.data.repository.favorite.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +29,8 @@ class DetailViewModel @Inject constructor(
                     val detailResult = event.detailResult
                     val favEntity = FavoriteEntity(
                         id = detailResult.id,
-                        title = detailResult.title,
+                        type = event.type,
+                        title = detailResult.title ?: "",
                         description = detailResult.description,
                         image = detailResult.image
                     )
@@ -37,7 +38,7 @@ class DetailViewModel @Inject constructor(
                 }
             }
             is DetailEvent.GetDetailType -> {
-                checkIsFavorite(event.id)
+                checkIsFavorite(event.name)
                 when (event.type) {
                     0 -> getTypesById(event.id)
                     1 -> getRoastsById(event.id)
@@ -52,11 +53,11 @@ class DetailViewModel @Inject constructor(
         if (isFav) {
             favoriteRepository.insertFavorite(favoriteEntity)
         } else {
-            favoriteRepository.deleteFavorite(id = favoriteEntity.id)
+            favoriteRepository.deleteFavorite(name = favoriteEntity.title)
         }
     }
 
-    private fun checkIsFavorite(id: Int) = viewModelScope.launch {
+    private fun checkIsFavorite(id: String) = viewModelScope.launch {
         favoriteRepository.isFavorite(id).collect { isFav ->
             _state.update {
                 it.copy(

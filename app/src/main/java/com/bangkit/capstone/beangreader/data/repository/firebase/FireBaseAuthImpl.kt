@@ -5,8 +5,8 @@ import com.bangkit.capstone.beangreader.presentation.screen.authentication.model
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.model.UserData
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -15,10 +15,9 @@ import javax.inject.Singleton
 @Singleton
 class FireBaseAuthImpl @Inject constructor(
     private val onTapClient: SignInClient
-): FireBaseAuth {
+) : FireBaseAuth {
 
     private val auth = Firebase.auth
-    private val fireStore = Firebase.firestore
 
     override suspend fun signInWithIntent(intent: Intent): SignInResult {
         val credential = onTapClient.getSignInCredentialFromIntent(intent)
@@ -32,17 +31,15 @@ class FireBaseAuthImpl @Inject constructor(
                     userId = uid,
                     username = displayName,
                     email = email,
-                    phone = phoneNumber,
                     profilePicture = photoUrl?.toString(),
-                    isNewUser = !isUserAlreadyExists(uid)
                 )
             },
             errorMessage = null
         )
     }
 
-    override suspend fun signInWithEmail(email: String, password: String): SignInResult {
-        val signInTask = auth.signInWithEmailAndPassword(email, password).await()
+    override suspend fun signInWithEmail(emails: String, password: String): SignInResult {
+        val signInTask = auth.signInWithEmailAndPassword(emails, password).await()
         val user = signInTask.user
         return SignInResult(
             data = user?.run {
@@ -50,9 +47,7 @@ class FireBaseAuthImpl @Inject constructor(
                     userId = uid,
                     username = displayName,
                     email = email,
-                    phone = phoneNumber,
                     profilePicture = photoUrl?.toString(),
-                    isNewUser = !isUserAlreadyExists(uid)
                 )
             },
             errorMessage = null
@@ -61,20 +56,21 @@ class FireBaseAuthImpl @Inject constructor(
 
     override suspend fun signUpWithEmail(
         name: String,
-        email: String,
+        emails: String,
         password: String
     ): SignInResult {
-        val registerTask = auth.createUserWithEmailAndPassword(email, password).await()
+        val registerTask = auth.createUserWithEmailAndPassword(emails, password).await()
+        registerTask.user?.updateProfile(
+            UserProfileChangeRequest.Builder().setDisplayName(name).build()
+        )
         val user = registerTask.user
         return SignInResult(
             data = user?.run {
                 UserData(
                     userId = uid,
-                    username = displayName ?: name,
+                    username = displayName,
                     email = email,
-                    phone = phoneNumber,
                     profilePicture = photoUrl?.toString(),
-                    isNewUser = !isUserAlreadyExists(uid)
                 )
             },
             errorMessage = null
@@ -86,26 +82,12 @@ class FireBaseAuthImpl @Inject constructor(
         auth.signOut()
     }
 
-    override fun getSignedUser(): UserData? = auth.currentUser?.run {
+    override suspend fun getSignedUser(): UserData? = auth.currentUser?.run {
         UserData(
             userId = uid,
             username = displayName,
             email = email,
-            phone = phoneNumber,
             profilePicture = photoUrl?.toString()
         )
-    }
-
-    private suspend fun isUserAlreadyExists(userId: String): Boolean {
-        return try {
-            val snapshot = fireStore.collection("user")
-                .document(userId)
-                .get()
-                .await()
-            snapshot.exists()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
-        }
     }
 }

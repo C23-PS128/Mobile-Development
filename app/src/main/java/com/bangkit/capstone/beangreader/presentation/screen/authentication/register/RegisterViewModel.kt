@@ -1,8 +1,9 @@
 package com.bangkit.capstone.beangreader.presentation.screen.authentication.register
 
+import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bangkit.capstone.beangreader.data.repository.Result
+import com.bangkit.capstone.beangreader.domain.model.Result
 import com.bangkit.capstone.beangreader.data.repository.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,6 +46,10 @@ class RegisterViewModel @Inject constructor(
             is RegisterEvent.OnRegisterClick -> {
                 register(_state.value.name, _state.value.email, _state.value.password)
             }
+
+            is RegisterEvent.SignInGoogleWithIntent -> {
+                signInWithIntent(event.intent)
+            }
         }
     }
 
@@ -69,9 +74,40 @@ class RegisterViewModel @Inject constructor(
                 is Result.Success -> {
                     _state.update {
                         it.copy(
-                            isSuccess = true,
+                            registerSuccess = true,
                             signInResult = result.data,
                             isLoading = false
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun signInWithIntent(intent: Intent) = viewModelScope.launch {
+        authRepository.signInWithIntent(intent).collect { result ->
+            when (result) {
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            isError = result.message,
+                            isConnectLoading = false
+                        )
+                    }
+                }
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isConnectLoading = true
+                        )
+                    }
+                }
+                is Result.Success -> {
+                    _state.update {
+                        it.copy(
+                            signInResult = result.data,
+                            isSuccess = true,
+                            isConnectLoading = false
                         )
                     }
                 }

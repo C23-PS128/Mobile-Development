@@ -13,9 +13,11 @@ import coil.compose.AsyncImage
 
 @Composable
 fun ListFavoriteItem(
+    id: Int,
+    type: Int,
     title: String,
     image: String,
-    navigateToDetail: (Int) -> Unit,
+    navigateToDetail: (Int, String, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ListItem(
@@ -33,7 +35,7 @@ fun ListFavoriteItem(
             )
         },
         modifier = modifier.clickable {
-            navigateToDetail
+            navigateToDetail(id, title, type)
         }
     )
     Divider()

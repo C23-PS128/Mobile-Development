@@ -8,13 +8,13 @@ import javax.inject.Singleton
 
 @Singleton
 class FavoriteRepositoryImpl @Inject constructor(private val favoriteDao: FavoriteDao) : FavoriteRepository {
-    override fun isFavorite(id: Int): Flow<Boolean> = favoriteDao.isFavorite(id)
+    override fun isFavorite(name: String): Flow<Boolean> = favoriteDao.isFavorite(name)
 
     override suspend fun insertFavorite(fav: FavoriteEntity) = favoriteDao.insert(fav)
 
     override suspend fun updateFavorite(fav: FavoriteEntity) = favoriteDao.updateFavorite(fav)
 
-    override fun getAllFavorite(): Flow<List<FavoriteEntity>> = favoriteDao.getAllFavorite()
+    override fun getAllFavorite(type: Int): Flow<List<FavoriteEntity>> = favoriteDao.getAllFavorite(type)
 
-    override suspend fun deleteFavorite(id: Int) = favoriteDao.delete(id)
+    override suspend fun deleteFavorite(name: String) = favoriteDao.delete(name)
 }

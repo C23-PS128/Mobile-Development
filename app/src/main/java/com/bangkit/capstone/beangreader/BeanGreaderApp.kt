@@ -8,6 +8,10 @@ import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCodeScanner
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.QrCodeScanner
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -15,13 +19,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -31,11 +30,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.get
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.bangkit.capstone.beangreader.presentation.common.AuthSharedViewModel
-import com.bangkit.capstone.beangreader.presentation.model.User
 import com.bangkit.capstone.beangreader.presentation.navigation.NavigationItem
 import com.bangkit.capstone.beangreader.presentation.navigation.Screen
 import com.bangkit.capstone.beangreader.presentation.screen.about.AboutScreen
+import com.bangkit.capstone.beangreader.presentation.screen.authentication.forgot.ForgotScreen
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.login.LoginScreen
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.register.RegisterScreen
 import com.bangkit.capstone.beangreader.presentation.screen.detail.DetailScreen
@@ -43,9 +41,12 @@ import com.bangkit.capstone.beangreader.presentation.screen.favorite.FavoriteScr
 import com.bangkit.capstone.beangreader.presentation.screen.history.HistoryScreen
 import com.bangkit.capstone.beangreader.presentation.screen.home.HomeScreen
 import com.bangkit.capstone.beangreader.presentation.screen.myprofile.MyProfileScreen
+import com.bangkit.capstone.beangreader.presentation.screen.onboarding.OnBoardingScreen
 import com.bangkit.capstone.beangreader.presentation.screen.profile.ProfileScreen
 import com.bangkit.capstone.beangreader.presentation.screen.scan.ScanScreen
+import com.bangkit.capstone.beangreader.presentation.screen.search.SearchScreen
 import com.bangkit.capstone.beangreader.presentation.screen.setting.SettingScreen
+import com.bangkit.capstone.beangreader.presentation.screen.splash.SplashScreen
 
 @Composable
 fun BeanGreaderApp(
@@ -54,9 +55,9 @@ fun BeanGreaderApp(
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val context = LocalContext.current
 
     Scaffold(
+        modifier = modifier,
         bottomBar = {
             if (currentRoute.shouldShowButtonAppBar()) {
                 BottomBar(navController)
@@ -65,13 +66,45 @@ fun BeanGreaderApp(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = "auth-graph",
+            startDestination = "splash-screen",
             modifier = Modifier.padding(innerPadding)
         ) {
+            composable("splash-screen") {
+                SplashScreen(
+                    onTimeOut = { isLoggedIn ->
+                        if (isLoggedIn) {
+                            navController.navigate(Screen.Home.route) {
+                                popUpTo("splash-screen") {
+                                    inclusive = true
+                                }
+                            }
+                        } else {
+                            navController.navigate("auth-graph") {
+                                popUpTo("splash-screen") {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    }
+                )
+            }
             composable(Screen.Home.route) {
                 HomeScreen(
-                    navigateToDetail = { id, type ->
-                        navController.navigate(Screen.Detail.createRoute(id, type))
+                    navigateToSearch = {
+                        navController.navigate(Screen.Search.route)
+                    },
+                    navigateToDetail = { id, title, type ->
+                        navController.navigate(Screen.Detail.createRoute(id, title, type))
+                    }
+                )
+            }
+            composable(Screen.Search.route) {
+                SearchScreen(
+                    onClickBack = {
+                        navController.navigateUp()
+                    },
+                    navigateToDetail = { id, type, title ->
+                        navController.navigate(Screen.Detail.createRoute(id, title, type))
                     }
                 )
             }
@@ -86,32 +119,51 @@ fun BeanGreaderApp(
                 HistoryScreen()
             }
             navigation(
-                startDestination = Screen.Login.route,
+                startDestination = "on-boarding",
                 route = "auth-graph"
             ) {
-                composable(Screen.Login.route) { entry ->
-                    val viewModel = entry.sharedViewModel<AuthSharedViewModel>(navController)
+                composable("on-boarding") {
+                    OnBoardingScreen(
+                        moveToLogin = {
+                            navController.navigate(Screen.Login.route)
+                        }
+                    )
+                }
+                composable(Screen.Login.route) {
                     LoginScreen(
                         onSignUpClick = {
                             navController.navigate(Screen.Register.route)
                         },
                         navigateToHome = {
                             navController.navigate(Screen.Home.route) {
-                                popUpTo(Screen.Login.route) { inclusive = true }
+                                popUpTo("auth-graph") {
+                                    inclusive = true
+                                }
                             }
                         },
-//                        moveToUserPreference = { userData ->
-//                            viewModel.setUser(userData?.toUser() ?: User())
-//                        }
+                        moveToForgot = {
+                            navController.navigate(Screen.Forgot.route) {
+                                popUpTo(Screen.Forgot.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
                     )
+                }
+                composable(Screen.Forgot.route) {
+                    ForgotScreen()
                 }
                 composable(Screen.Register.route) {
                     RegisterScreen(
-                        onRegisterClick = {
+                        navigateToLogin = {
                             navController.navigate(Screen.Login.route)
                         },
-                        onSigInClick = {
-                            navController.navigate(Screen.Login.route)
+                        navigateToHome = {
+                            navController.navigate(Screen.Home.route) {
+                                popUpTo("auth-graph") {
+                                    inclusive = true
+                                }
+                            }
                         }
                     )
                 }
@@ -136,8 +188,8 @@ fun BeanGreaderApp(
                         onBackClick = {
                             navController.navigateUp()
                         },
-                        navigateToDetail = { id, type ->
-                            navController.navigate(Screen.Detail.createRoute(id, type))
+                        navigateToDetail = { id, title, type ->
+                            navController.navigate(Screen.Detail.createRoute(id, title, type))
                         }
                     )
                 }
@@ -145,6 +197,13 @@ fun BeanGreaderApp(
                     MyProfileScreen(
                         onBackClick = {
                             navController.navigateUp()
+                        },
+                        navigateToLogin = {
+                            navController.navigate(Screen.Login.route) {
+                                popUpTo(Screen.Home.route) {
+                                    inclusive = true
+                                }
+                            }
                         }
                     )
                 }
@@ -176,14 +235,17 @@ fun BeanGreaderApp(
                 route = Screen.Detail.route,
                 arguments = listOf(
                     navArgument("beanId") { type = NavType.IntType },
-                    navArgument("type") { type = NavType.IntType }
+                    navArgument("type") { type = NavType.IntType },
+                    navArgument("name") { type = NavType.StringType }
                 ),
             ) {
                 val id = it.arguments?.getInt("beanId") ?: 1
                 val type = it.arguments?.getInt("type") ?: 1
+                val name = it.arguments?.getString("name") ?: ""
                 DetailScreen(
                     id = id,
                     type = type,
+                    name = name,
                     navigateBack = {
                         navController.navigateUp()
                     }
@@ -205,25 +267,29 @@ fun BottomBar(
         val items = listOf(
             NavigationItem(
                 title = stringResource(R.string.home),
-                icon = Icons.Default.Home,
+                iconActive = Icons.Default.Home,
+                iconNonActive = Icons.Outlined.Home,
                 contentScreen = Screen.Home,
-                contentDescription = "home_page"
+                contentDescription = "home_page",
             ),
             NavigationItem(
                 title = stringResource(R.string.scan),
-                icon = Icons.Default.QrCodeScanner,
+                iconActive = Icons.Default.QrCodeScanner,
+                iconNonActive = Icons.Outlined.QrCodeScanner,
                 contentScreen = Screen.Scan,
                 contentDescription = "scan_page"
             ),
             NavigationItem(
                 title = stringResource(R.string.history),
-                icon = Icons.Default.History,
+                iconActive = Icons.Default.History,
+                iconNonActive = Icons.Outlined.History,
                 contentScreen = Screen.History,
                 contentDescription = "history_page"
             ),
             NavigationItem(
                 title = stringResource(R.string.profile),
-                icon = Icons.Default.Person,
+                iconActive = Icons.Default.Person,
+                iconNonActive = Icons.Outlined.Person,
                 contentScreen = Screen.Profile,
                 contentDescription = "profile_page"
             )
@@ -233,8 +299,12 @@ fun BottomBar(
                 NavigationBarItem(
                     icon = {
                         Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.contentDescription
+                            imageVector = if (currentRoute == item.contentScreen.route) {
+                                item.iconActive
+                            } else {
+                                item.iconNonActive
+                            },
+                            contentDescription = item.contentDescription,
                         )
                     },
                     label = { Text(item.title) },
@@ -258,18 +328,7 @@ private fun String?.shouldShowButtonAppBar(): Boolean {
     return this in setOf(
         Screen.Home.route,
         Screen.History.route,
-        Screen.Profile.route
+        Screen.Profile.route,
     )
-}
-
-@Composable
-inline fun <reified T: ViewModel> NavBackStackEntry.sharedViewModel(
-    navController: NavHostController,
-): T {
-    val navGraphRoute = destination.parent?.route ?: return viewModel()
-    val parentEntry = remember(this) {
-        navController.getBackStackEntry(navGraphRoute)
-    }
-    return viewModel(parentEntry)
 }
 

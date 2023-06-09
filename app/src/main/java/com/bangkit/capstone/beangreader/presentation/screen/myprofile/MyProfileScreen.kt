@@ -1,5 +1,6 @@
 package com.bangkit.capstone.beangreader.presentation.screen.myprofile
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,60 +15,99 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
+import com.bangkit.capstone.beangreader.presentation.screen.authentication.model.UserData
 import com.bangkit.capstone.beangreader.presentation.screen.myprofile.component.ListMenuItem
 import com.bangkit.capstone.beangreader.presentation.screen.myprofile.component.LogoutButton
 
 @Composable
 fun MyProfileScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    navigateToLogin: () -> Unit,
+    viewModel: MyProfileViewModel = hiltViewModel()
 ) {
-    MyProfileContent(onBackClick = onBackClick)
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    
+    LaunchedEffect(key1 = state.isSuccess) {
+        if (state.isSuccess) {
+            navigateToLogin()
+            Toast.makeText(context, context.getString(R.string.logout_success), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    MyProfileContent(
+        onBackClick = onBackClick,
+        userData = state.userData,
+        onLogoutClick = {
+            viewModel.logout()
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyProfileContent(
+    userData: UserData?,
     onBackClick: () -> Unit,
+    onLogoutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        topBar = { 
+        topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = stringResource(R.string.my_profile))}, 
+                title = { Text(text = stringResource(R.string.my_profile)) },
                 navigationIcon = {
-                    IconButton (onClick = onBackClick) {
+                    IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "back"
                         )
                     }
-                }
+                },
             )
         }
     ) {
         Column(
             modifier = modifier
                 .padding(it)
-                .padding(top = 16.dp)
+                .padding(top = 24.dp)
         ) {
-            AsyncImage(
-                model = "https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg",
-                contentDescription = stringResource(R.string.profile_image),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .padding(top = 16.dp, bottom = 24.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .clip(CircleShape)
-                    .size(148.dp)
-            )
+            if (userData?.profilePicture != null) {
+                AsyncImage(
+                    model = userData.profilePicture,
+                    contentDescription = stringResource(R.string.profile_image),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .padding(bottom = 24.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .clip(CircleShape)
+                        .size(144.dp)
+                )
+            } else {
+                AsyncImage(
+                    model = "https://i.pinimg.com/280x280_RS/73/01/55/7301553dbeb6f667ad47fa206d26ce82.jpg",
+                    contentDescription = stringResource(R.string.profile_image),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .padding(top = 16.dp, bottom = 24.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .clip(CircleShape)
+                        .size(144.dp)
+                )
+            }
             ListMenuItem(
                 overLineContent = {
                     Text(
@@ -77,10 +117,12 @@ fun MyProfileContent(
                     )
                 },
                 headlineContent = {
-                    Text(
-                        text = "John Wick",
-                        style = MaterialTheme.typography.titleMedium
-                    )
+                    if (userData?.username != null) {
+                        Text(
+                            text = userData.username,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
                 },
             )
             ListMenuItem(
@@ -92,29 +134,16 @@ fun MyProfileContent(
                     )
                 },
                 headlineContent = {
-                    Text(
-                        text = "johnwick@gmail.com",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                },
-            )
-            ListMenuItem(
-                overLineContent = {
-                    Text(
-                        text = stringResource(R.string.my_phone),
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                },
-                headlineContent = {
-                    Text(
-                        text = "083217382931",
-                        style = MaterialTheme.typography.titleMedium
-                    )
+                    if (userData?.email != null) {
+                        Text(
+                            text = userData.email,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
                 },
             )
             LogoutButton(
-                onClick = {},
+                onLogoutClick = onLogoutClick,
                 modifier = Modifier.padding(vertical = 16.dp)
             )
         }

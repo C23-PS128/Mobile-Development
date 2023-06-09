@@ -51,6 +51,21 @@
     <string name="my_name">name</string>
     <string name="my_email">email</string>
     <string name="my_phone">phone</string>
-    <string name="default_web_client_id" translatable="false">331033501530-hphqoh4bm26ti3ob21cav7vv7vt0invn.apps.googleusercontent.com</string>
-    <string name="about_application_description">\t \t \t Bean Greader is an innovative app that helps you easily and accurately detect and evaluate the quality of coffee beans. Using advanced image processing and data analysis technologies, Bean Greader can identify the physical and visual characteristics of coffee beans, such as size, shape, color, and consistency, thus providing comprehensive information on the quality and suitability of the beans. This app is suitable for coffee experts, coffee industry workers, or coffee lovers who want to get the best coffee beans for further processing or immediate enjoyment. Enjoy a deeper exploration of the world of coffee with Bean Greader.</string>
+    <string name="login_success">Login Successful</string>
+    <string name="register_success">Registration successful, please login</string>
+    <string name="logout_success">Logout Successful, Please login</string>
+    <string name="about_application_description">Bean Greader is an innovative app that helps you easily and accurately detect and evaluate the quality of coffee beans. Using advanced image processing and data analysis technologies, Bean Greader can identify the physical and visual characteristics of coffee beans, such as size, shape, color, and consistency, thus providing comprehensive information on the quality and suitability of the beans. This app is suitable for coffee experts, coffee industry workers, or coffee lovers who want to get the best coffee beans for further processing or immediate enjoyment. Enjoy a deeper exploration of the world of coffee with Bean Greader.</string>
+    <string name="web_client" translatable="false">505766495874-dr85iqquj83h8j5ai1usiktc7vs9a1gu.apps.googleusercontent.com</string>
+    <string name="title_board_1">Welcome to Bean Greader</string>
+    <string name="description_board_1">Explore the world of coffee and find the best beans to suit your taste with the help of Artificial Intelligence.</string>
+    <string name="title_board_2">Know the quality of your coffee beans</string>
+    <string name="description_board_2">Bean Greader will help you to find out the quality of your coffee beans, with just a photo</string>
+    <string name="title_board_3">Explore the World of Coffee Deeper</string>
+    <string name="description_board_3">Discover different varieties of coffee beans, learn about their origins, and choose the best beans for an unforgettable coffee experience.</string>
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="description_forgot">Please enter your email to reset your password</string>
+    <string name="confirm_email">Email Confirmation</string>
 </resources>

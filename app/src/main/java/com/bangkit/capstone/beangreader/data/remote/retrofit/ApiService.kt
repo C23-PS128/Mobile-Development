@@ -4,9 +4,11 @@ import com.bangkit.capstone.beangreader.data.remote.response.article.BrewsRespon
 import com.bangkit.capstone.beangreader.data.remote.response.article.DetailCoffeesResponse
 import com.bangkit.capstone.beangreader.data.remote.response.article.DrinksResponse
 import com.bangkit.capstone.beangreader.data.remote.response.article.RoastsResponse
+import com.bangkit.capstone.beangreader.data.remote.response.article.SearchResponse
 import com.bangkit.capstone.beangreader.data.remote.response.article.TypeCoffeeResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -41,4 +43,9 @@ interface ApiService {
     suspend fun getDrinksById(
         @Path("id") id: Int
     ) : DetailCoffeesResponse
+
+    @GET("search")
+    suspend fun search(
+        @Query("query") query: String
+    ) : SearchResponse
 }

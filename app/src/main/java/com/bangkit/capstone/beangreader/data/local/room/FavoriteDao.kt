@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.bangkit.capstone.beangreader.data.local.entity.FavoriteEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -16,12 +15,12 @@ interface FavoriteDao {
     @Insert
     suspend fun updateFavorite(fav: FavoriteEntity)
 
-    @Query("DELETE FROM favorite WHERE id = :id")
-    suspend fun delete(id: Int)
+    @Query("DELETE FROM favorite WHERE title = :name")
+    suspend fun delete(name: String)
 
-    @Query("SELECT * FROM favorite")
-    fun getAllFavorite(): Flow<List<FavoriteEntity>>
+    @Query("SELECT * FROM favorite WHERE type = :type")
+    fun getAllFavorite(type: Int): Flow<List<FavoriteEntity>>
 
-    @Query("SELECT EXISTS (SELECT * FROM favorite WHERE id = :id)")
-    fun isFavorite(id: Int): Flow<Boolean>
+    @Query("SELECT EXISTS (SELECT * FROM favorite WHERE title = :name)")
+    fun isFavorite(name: String): Flow<Boolean>
 }

@@ -1,7 +1,6 @@
 package com.bangkit.capstone.beangreader.presentation.screen.authentication.register
 
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.model.SignInResult
-import com.google.firebase.auth.FirebaseUser
 
 data class RegisterState(
     val name: String = "",
@@ -9,6 +8,8 @@ data class RegisterState(
     val password: String = "",
     val signInResult: SignInResult? = null,
     val isLoading: Boolean = false,
+    val isConnectLoading: Boolean = false,
     val isSuccess: Boolean = false,
+    val registerSuccess: Boolean = false,
     val isError: String? = null,
 )

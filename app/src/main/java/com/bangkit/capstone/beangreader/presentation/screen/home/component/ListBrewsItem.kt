@@ -13,19 +13,19 @@ import com.bangkit.capstone.beangreader.data.remote.response.article.BrewsItem
 fun ListBrewsItem(
     brewsItem: List<BrewsItem>,
     modifier: Modifier = Modifier,
-    navigateToDetail: (Int) -> Unit
+    navigateToDetail: (Int, String) -> Unit
 ) {
     LazyRow(
         contentPadding = PaddingValues(16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
     ) {
-        items(brewsItem, key = { it.id ?: 0 }) { item ->
+        items(brewsItem, key = { it.id }) { item ->
             CardItem(
                 urlImage = "${item.image}",
                 title = "${item.title}",
                 onClick = {
-                    navigateToDetail(item.id ?: 0)
+                    navigateToDetail(item.id, item.title ?: "")
                 }
             )
         }

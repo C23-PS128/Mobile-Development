@@ -28,24 +28,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.presentation.screen.detail.component.FloatingFavorite
-import com.bangkit.capstone.beangreader.ui.theme.BeanGreaderTheme
 
 @Composable
 fun DetailScreen(
     id: Int,
     type: Int,
+    name: String,
     viewModel: DetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit
 ) {
     LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(DetailEvent.GetDetailType(id, type))
+        viewModel.onEvent(DetailEvent.GetDetailType(id, name, type))
     }
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -56,7 +55,7 @@ fun DetailScreen(
             description = "${it.description}",
             isFav = state.isFav,
             onFavClick = {
-                viewModel.onEvent(DetailEvent.OnFavClick(!state.isFav, state.detailResult))
+                viewModel.onEvent(DetailEvent.OnFavClick(!state.isFav, type, state.detailResult))
             },
             navigateBack = navigateBack
         )
@@ -139,19 +138,5 @@ fun DetailInformation(
                 .padding(8.dp)
                 .fillMaxWidth()
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DetailScreenPreview() {
-    BeanGreaderTheme {
-        DetailContent(
-            urlImage = "",
-            title = "Arabica",
-            description = "Lorem Ipsum jklhajjbfadjk afeihoeihfjb oihefoihoifeqhihpihefpihp oiehfoiefoi  oiheqfoihqeoifh oiqhefoihpeqofhpiiewhfou",
-            isFav = true,
-            onFavClick = { /*TODO*/ },
-            navigateBack = { /*TODO*/ })
     }
 }

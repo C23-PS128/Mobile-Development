@@ -16,10 +16,10 @@ import com.bangkit.capstone.beangreader.R
 @Composable
 fun LogoutButton(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onLogoutClick: () -> Unit
 ) {
     Button(
-        onClick = onClick,
+        onClick = onLogoutClick,
         shape = ShapeDefaults.Medium,
         modifier = modifier
             .fillMaxWidth()

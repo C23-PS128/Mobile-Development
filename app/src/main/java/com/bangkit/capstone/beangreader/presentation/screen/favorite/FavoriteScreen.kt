@@ -1,7 +1,8 @@
 package com.bangkit.capstone.beangreader.presentation.screen.favorite
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -21,33 +22,19 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.data.local.entity.FavoriteEntity
+import com.bangkit.capstone.beangreader.presentation.component.EmptyScreen
 import com.bangkit.capstone.beangreader.presentation.screen.favorite.component.ListFavoriteItem
-
-@Composable
-fun FavoriteScreen(
-    onBackClick: () -> Unit,
-    navigateToDetail: (Int, Int) -> Unit,
-    viewModel: FavoriteViewModel = hiltViewModel()
-) {
-    val state by viewModel.state.collectAsState()
-    Log.d("Favorite", "FavoriteScreen: ${state.favoriteEntity}")
-
-    FavoriteContent(
-        onBackClick = onBackClick,
-        listFavorite = state.favoriteEntity,
-        navigateToDetail = navigateToDetail
-    )
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoriteContent(
+fun FavoriteScreen(
     onBackClick: () -> Unit,
-    listFavorite: List<FavoriteEntity>,
-    navigateToDetail: (Int, Int) -> Unit,
+    navigateToDetail: (Int, String, Int) -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: FavoriteViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsState()
 
-    ) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -63,21 +50,77 @@ fun FavoriteContent(
                 modifier = modifier
             )
         }
-    ) { padding ->
-        LazyColumn(
-            contentPadding = padding,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            items(listFavorite, key = { it.id }) { item ->
-                Log.d("Fav", "FavoriteItem: $item")
-                ListFavoriteItem(
-                    title = "${item.title}",
-                    image = "${item.image}",
-                    navigateToDetail = {
-                        navigateToDetail(item.id, 0)
-                    }
+    ) {
+        Box(modifier = Modifier.padding(it)) {
+            if (
+                state.favoriteTypeEntity.isEmpty() &&
+                state.favoriteRoastEntity.isEmpty() &&
+                state.favoriteBrewEntity.isEmpty() &&
+                state.favoriteDrinkEntity.isEmpty()
+            ) {
+                EmptyScreen()
+            } else {
+                FavoriteContent(
+                    listTypeFavorite = state.favoriteTypeEntity,
+                    listRoastFavorite = state.favoriteRoastEntity,
+                    listBrewFavorite = state.favoriteBrewEntity,
+                    listDrinkFavorite = state.favoriteDrinkEntity,
+                    navigateToDetail = navigateToDetail
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun FavoriteContent(
+    listTypeFavorite: List<FavoriteEntity>,
+    listRoastFavorite: List<FavoriteEntity>,
+    listBrewFavorite: List<FavoriteEntity>,
+    listDrinkFavorite: List<FavoriteEntity>,
+    navigateToDetail: (Int, String, Int) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        items(listTypeFavorite) { item ->
+            ListFavoriteItem(
+                id = item.id,
+                title = item.title,
+                type = item.type,
+                image = "${item.image}",
+                navigateToDetail = navigateToDetail
+            )
+        }
+        items(listRoastFavorite) { item ->
+            ListFavoriteItem(
+                id = item.id,
+                title = item.title,
+                type = item.type,
+                image = "${item.image}",
+                navigateToDetail = navigateToDetail
+            )
+        }
+        items(listBrewFavorite) { item ->
+            ListFavoriteItem(
+                id = item.id,
+                title = item.title,
+                type = item.type,
+                image = "${item.image}",
+                navigateToDetail = navigateToDetail
+            )
+        }
+        items(listDrinkFavorite) { item ->
+            ListFavoriteItem(
+                id = item.id,
+                title = item.title,
+                type = item.type,
+                image = "${item.image}",
+                navigateToDetail = navigateToDetail
+            )
         }
     }
 }
