@@ -31,14 +31,22 @@ class HomeViewModel @Inject constructor(private val repository: BeanRepository) 
                 is Result.Error -> {
                     _state.update {
                         it.copy(
+                            isLoading = false,
                             errorMessage = result.message
                         )
                     }
                 }
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
+                            isLoading = false,
                             listTypes = result.data
                         )
                     }
@@ -53,14 +61,22 @@ class HomeViewModel @Inject constructor(private val repository: BeanRepository) 
                 is Result.Error -> {
                     _state.update {
                         it.copy(
+                            isLoading = false,
                             errorMessage = result.message
                         )
                     }
                 }
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
+                            isLoading = false,
                             listRoasts = result.data
                         )
                     }
@@ -72,12 +88,26 @@ class HomeViewModel @Inject constructor(private val repository: BeanRepository) 
     private fun getBrews() = viewModelScope.launch {
         repository.getBrews().collect { result ->
             when (result) {
-                is Result.Error -> {}
-                is Result.Loading -> {}
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = result.message
+                        )
+                    }
+                }
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
-                            listBrews = result.data
+                            listBrews = result.data,
+                            isLoading = false
                         )
                     }
                 }
@@ -88,12 +118,26 @@ class HomeViewModel @Inject constructor(private val repository: BeanRepository) 
     private fun getDrinks() = viewModelScope.launch {
         repository.getDrinks().collect { result ->
             when (result) {
-                is Result.Error -> {}
-                is Result.Loading -> {}
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            errorMessage = result.message,
+                            isLoading = false
+                        )
+                    }
+                }
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
-                            listDrinks = result.data
+                            listDrinks = result.data,
+                            isLoading = false
                         )
                     }
                 }

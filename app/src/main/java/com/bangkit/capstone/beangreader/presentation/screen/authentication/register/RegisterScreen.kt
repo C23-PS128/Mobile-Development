@@ -176,7 +176,7 @@ fun RegisterContent(
             )
 
             Text(
-                text = stringResource(R.string.description_sign_in),
+                text = stringResource(R.string.description_sign_up),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier

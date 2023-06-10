@@ -158,7 +158,7 @@ fun LoginContent(
                 fontWeight = FontWeight.Medium
             )
             Text(
-                text = stringResource(R.string.description_sign_up),
+                text = stringResource(R.string.description_sign_in),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
