@@ -13,7 +13,6 @@ class UserRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseA
             firebaseUser.uid,
             firebaseUser.displayName,
             firebaseUser.email,
-            firebaseUser.phoneNumber,
             firebaseUser.photoUrl?.toString()
         )
     }

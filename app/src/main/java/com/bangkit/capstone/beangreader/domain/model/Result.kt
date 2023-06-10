@@ -1,4 +1,4 @@
-package com.bangkit.capstone.beangreader.data.repository
+package com.bangkit.capstone.beangreader.domain.model
 
 sealed class Result<out R> {
     data class Loading<out T>(val data: T? = null) : Result<T>()

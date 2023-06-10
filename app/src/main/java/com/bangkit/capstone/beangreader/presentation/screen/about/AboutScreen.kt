@@ -1,11 +1,7 @@
 package com.bangkit.capstone.beangreader.presentation.screen.about
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,10 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
+import com.bangkit.capstone.beangreader.ui.theme.BeanGreaderTheme
 
 @Composable
 fun AboutScreen(
@@ -76,7 +74,7 @@ fun AboutContent(
                 contentDescription = stringResource(R.string.app_name),
                 modifier = Modifier
                     .size(144.dp)
-                    .padding(bottom = 16.dp)
+                    .padding(vertical = 16.dp)
             )
             AboutText()
         }
@@ -95,9 +93,20 @@ fun AboutText(
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Justify,
             softWrap = true,
+            letterSpacing = TextUnit.Unspecified,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
         )
+    }
+}
+
+@Preview
+@Composable
+fun AboutScreenPrev() {
+    BeanGreaderTheme {
+        AboutScreen {
+
+        }
     }
 }

@@ -4,7 +4,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class NavigationItem(
     val title: String,
-    val icon: ImageVector,
+    val iconActive: ImageVector,
+    val iconNonActive: ImageVector,
     val contentScreen: Screen,
-    val contentDescription: String
+    val contentDescription: String,
 )

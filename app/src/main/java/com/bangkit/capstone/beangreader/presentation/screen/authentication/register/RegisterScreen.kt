@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -171,10 +172,11 @@ fun RegisterContent(
             Text(
                 text = stringResource(R.string.sign_up),
                 style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.SemiBold
             )
 
             Text(
-                text = stringResource(R.string.description_signup),
+                text = stringResource(R.string.description_sign_in),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -251,7 +253,7 @@ fun RegisterContent(
                 }
             }
 
-            Spacer(modifier = Modifier.height(120.dp))
+            Spacer(modifier = Modifier.height(128.dp))
         }
     }
 }

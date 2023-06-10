@@ -50,6 +50,16 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
+    override fun sendPasswordResetEmail(emails: String): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading())
+        try {
+            firebaseAuth.sendPasswordResetEmail(emails)
+            emit(Result.Success(true))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message))
+        }
+    }.flowOn(Dispatchers.IO)
+
     override fun getSignedUser() = flow {
         val result = firebaseAuth.getSignedUser()
         emit(result)

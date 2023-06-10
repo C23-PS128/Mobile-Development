@@ -8,24 +8,34 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bangkit.capstone.beangreader.R
 
 @Composable
 fun ListMenu(
-    modifier: Modifier = Modifier,
     onCLick: () -> Unit,
-    text: @Composable () -> Unit,
-    leadingIcon: @Composable () -> Unit,
+    text: String,
+    imageVector: ImageVector,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
 ) {
     ListItem(
         modifier = modifier
             .clickable { onCLick() },
-        headlineContent = text,
-        leadingContent = leadingIcon,
+        headlineContent = {
+            Text(text = text)
+        },
+        leadingContent = {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = contentDescription
+            )
+        },
         trailingContent = {
             Icon(
                 imageVector = Icons.Outlined.ChevronRight,

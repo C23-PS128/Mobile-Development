@@ -22,7 +22,7 @@ suspend fun signInIntentSender(context: Context): IntentSender ? {
 fun buildSignInRequest(context: Context): BeginSignInRequest {
     return BeginSignInRequest.Builder()
         .setGoogleIdTokenRequestOptions(
-            BeginSignInRequest.GoogleIdTokenRequestOptions.Builder()
+            BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                 .setSupported(true)
                 .setFilterByAuthorizedAccounts(false)
                 .setServerClientId(context.getString(R.string.default_web_client_id))

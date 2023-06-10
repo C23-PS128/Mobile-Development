@@ -15,8 +15,8 @@
     <string name="login">Masuk</string>
     <string name="or">atau</string>
     <string name="connect_google">Sambungkan dengan Google</string>
-    <string name="description_signup">Untuk mencari tahu kualitas kopi Anda</string>
-    <string name="description_sign_in">Untuk melanjutkan penggunaan aplikasi kami</string>
+    <string name="description_sign_in">Untuk mencari tahu kualitas kopi Anda</string>
+    <string name="description_sign_up">Untuk memulai mencari informasi kopi</string>
     <string name="forgot">Lupa Kata Sandi?</string>
     <string name="need_account">Belum punya akun?</string>
     <string name="have_account">Sudah memiliki akun?</string>
@@ -49,8 +49,25 @@
     <string name="my_phone">telepon</string>
     <string name="roast">Roasting Biji Kopi</string>
     <string name="about">Tentang</string>
-    <string name="about_application_description">\t \t \t Bean Greader adalah sebuah aplikasi inovatif yang membantu Anda dalam mendeteksi dan mengevaluasi kualitas biji kopi dengan mudah dan akurat. Dengan menggunakan teknologi canggih pemrosesan citra dan analisis data, Bean Greader dapat mengidentifikasi karakteristik fisik dan visual biji kopi, seperti ukuran, bentuk, warna, dan konsistensi, sehingga memberikan informasi yang komprehensif tentang kualitas dan kecocokan biji kopi tersebut. Aplikasi ini cocok digunakan oleh para ahli kopi, pekerja industri kopi, atau pecinta kopi yang ingin mendapatkan biji kopi terbaik untuk diproses lebih lanjut atau dinikmati langsung. Nikmati pengalaman eksplorasi dunia kopi yang lebih dalam dengan Bean Greader.</string>
+    <string name="login_success">Login berhasil</string>
+    <string name="logout_success">Berhasil keluar, silakan masuk</string>
+    <string name="about_application_description">Bean Greader adalah sebuah aplikasi inovatif yang membantu Anda dalam mendeteksi dan mengevaluasi kualitas biji kopi dengan mudah dan akurat. Dengan menggunakan teknologi canggih pemrosesan citra dan analisis data, Bean Greader dapat mengidentifikasi karakteristik fisik dan visual biji kopi, seperti ukuran, bentuk, warna, dan konsistensi, sehingga memberikan informasi yang komprehensif tentang kualitas dan kecocokan biji kopi tersebut. Aplikasi ini cocok digunakan oleh para ahli kopi, pekerja industri kopi, atau pecinta kopi yang ingin mendapatkan biji kopi terbaik untuk diproses lebih lanjut atau dinikmati langsung. Nikmati pengalaman eksplorasi dunia kopi yang lebih dalam dengan Bean Greader.</string>
     <string name="brew">Brewing Kopi</string>
     <string name="drink">Minuman Kopi Populer</string>
     <string name="icon_visibilityOff">Lihat Kata Sandi</string>
+    <string name="register_success">Pendaftaran berhasil, silahkan masuk</string>
+    <string name="title_board_1">Selamat datang di Bean Greader</string>
+    <string name="description_board_1">Jelajahi dunia kopi dan temukan biji terbaik yang sesuai dengan selera Anda dengan bantuan Artifical Intelegent.</string>
+    <string name="title_board_2">Ketahui kualitas biji kopimu</string>
+    <string name="description_board_2">Hanya dengan foto, Bean Greader akan membantu Kamu untuk mengetahui informasi kulitas biji kopi kamu dengan baik dan akurat.</string>
+    <string name="title_board_3">Jelajahi Dunia Kopi Lebih Dalam</string>
+    <string name="description_board_3">Temukan berbagai varietas biji kopi, pelajari asal-usulnya, dan pilih biji terbaik untuk pengalaman kopi yang tak terlupakan.</string>
+    <string name="get_started">Memulai</string>
+    <string name="next">Lanjut</string>
+    <string name="skip">Skip</string>
+    <string name="forgot_password">Lupa Kata Sandi?</string>
+    <string name="description_forgot">Silahkan masukkan email anda untuk mereset password</string>
+    <string name="confirm_email">Reset</string>
+    <string name="not_found">Halaman Tidak Ditemukan</string>
+    <string name="password_message">Kami telah mengirimkan email berisi tautan untuk mereset kata sandi</string>
 </resources>

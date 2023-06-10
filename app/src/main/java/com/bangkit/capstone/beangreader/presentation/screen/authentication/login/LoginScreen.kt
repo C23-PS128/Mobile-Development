@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -147,7 +148,6 @@ fun LoginContent(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .fillMaxSize()
                 .verticalScroll(scrollState)
         ) {
             Spacer(modifier = Modifier.height(100.dp))
@@ -155,9 +155,10 @@ fun LoginContent(
             Text(
                 text = stringResource(R.string.sign_in),
                 style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.Medium
             )
             Text(
-                text = stringResource(R.string.description_sign_in),
+                text = stringResource(R.string.description_sign_up),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -238,7 +239,7 @@ fun LoginContent(
                 }
             }
 
-            Spacer(modifier = Modifier.height(120.dp))
+            Spacer(modifier = Modifier.height(128.dp))
         }
     }
 }

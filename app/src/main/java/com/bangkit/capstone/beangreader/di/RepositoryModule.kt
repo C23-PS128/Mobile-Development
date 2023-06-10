@@ -10,10 +10,8 @@ import com.bangkit.capstone.beangreader.data.repository.setting.SettingRepositor
 import com.bangkit.capstone.beangreader.data.repository.setting.SettingRepositoryImpl
 import com.bangkit.capstone.beangreader.data.repository.user.UserRepository
 import com.bangkit.capstone.beangreader.data.repository.user.UserRepositoryImpl
-import com.google.firebase.auth.FirebaseAuth
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton

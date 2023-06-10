@@ -77,6 +77,10 @@ class FireBaseAuthImpl @Inject constructor(
         )
     }
 
+    override suspend fun sendPasswordResetEmail(email: String) {
+        auth.sendPasswordResetEmail(email).await()
+    }
+
     override suspend fun signOut() {
         onTapClient.signOut()
         auth.signOut()

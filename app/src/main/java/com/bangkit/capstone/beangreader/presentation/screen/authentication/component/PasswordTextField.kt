@@ -62,7 +62,7 @@ fun PasswordTextField(
                 Icon(imageVector = iconImage, contentDescription = description)
             }
         },
-        maxLines = 1,
+        singleLine = true,
         visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
         label = { Text(text = label) },
         modifier = modifier

@@ -1,15 +1,16 @@
 package com.bangkit.capstone.beangreader.data.repository.bean
 
-import com.bangkit.capstone.beangreader.data.remote.response.article.DetailItem
 import com.bangkit.capstone.beangreader.data.remote.response.article.BrewsItem
+import com.bangkit.capstone.beangreader.data.remote.response.article.DetailItem
 import com.bangkit.capstone.beangreader.data.remote.response.article.DrinksItem
+import com.bangkit.capstone.beangreader.data.remote.response.article.ResultsItem
 import com.bangkit.capstone.beangreader.data.remote.response.article.RoastsItem
 import com.bangkit.capstone.beangreader.data.remote.response.article.TypeCoffeeItem
-import com.bangkit.capstone.beangreader.data.repository.Result
+import com.bangkit.capstone.beangreader.domain.model.Result
 import kotlinx.coroutines.flow.Flow
 
 interface BeanRepository {
-    fun searchBean(query: String): Flow<List<TypeCoffeeItem>>
+    fun searchBean(query: String): Flow<List<ResultsItem>>
 
     fun getTypes(): Flow<Result<List<TypeCoffeeItem>>>
 

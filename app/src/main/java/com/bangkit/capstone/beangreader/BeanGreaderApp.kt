@@ -151,7 +151,11 @@ fun BeanGreaderApp(
                     )
                 }
                 composable(Screen.Forgot.route) {
-                    ForgotScreen()
+                    ForgotScreen(
+                        moveToLogin = {
+                            navController.navigateUp()
+                        }
+                    )
                 }
                 composable(Screen.Register.route) {
                     RegisterScreen(

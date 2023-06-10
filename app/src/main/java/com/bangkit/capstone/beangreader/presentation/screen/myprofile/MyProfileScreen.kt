@@ -83,7 +83,7 @@ fun MyProfileContent(
         Column(
             modifier = modifier
                 .padding(it)
-                .padding(top = 24.dp)
+                .padding(top = 16.dp)
         ) {
             if (userData?.profilePicture != null) {
                 AsyncImage(
@@ -91,7 +91,7 @@ fun MyProfileContent(
                     contentDescription = stringResource(R.string.profile_image),
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .padding(bottom = 24.dp)
+                        .padding(bottom = 32.dp)
                         .align(Alignment.CenterHorizontally)
                         .clip(CircleShape)
                         .size(144.dp)

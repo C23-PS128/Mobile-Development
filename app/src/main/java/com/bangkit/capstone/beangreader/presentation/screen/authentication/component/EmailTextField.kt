@@ -14,7 +14,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun NormalTextField(
+fun EmailTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
@@ -33,7 +33,7 @@ fun NormalTextField(
             )
         },
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         label = { Text(text = label) },
         modifier = modifier
             .fillMaxWidth()

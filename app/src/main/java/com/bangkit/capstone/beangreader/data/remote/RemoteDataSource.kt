@@ -17,4 +17,6 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getDrinks() = apiService.getDrinks()
     suspend fun getDetailDrinks(id: Int) = apiService.getDrinksById(id)
+
+    suspend fun getSearch(query: String) = apiService.search(query)
 }

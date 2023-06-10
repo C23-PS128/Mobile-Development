@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "505766495874-fhf6jshbt3pl1e849csu0j87b0od6for.apps.googleusercontent.com",
+          "client_id": "505766495874-dr85iqquj83h8j5ai1usiktc7vs9a1gu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bangkit.capstone.beangreader",
+            "certificate_hash": "cd9f4d12bc7fb14eed4f4301ab20ea7fbf36dc6b"
+          }
+        },
+        {
+          "client_id": "505766495874-9hgtepftu2t0vpiot38r9attubr6ffft.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "505766495874-fhf6jshbt3pl1e849csu0j87b0od6for.apps.googleusercontent.com",
+              "client_id": "505766495874-9hgtepftu2t0vpiot38r9attubr6ffft.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
