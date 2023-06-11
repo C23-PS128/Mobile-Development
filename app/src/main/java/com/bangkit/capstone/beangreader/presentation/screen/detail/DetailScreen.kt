@@ -2,14 +2,12 @@ package com.bangkit.capstone.beangreader.presentation.screen.detail
 
 import android.widget.Toast
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -17,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -109,15 +108,15 @@ fun DetailContent(
             )
             IconButton(
                 onClick = navigateBack,
+                colors = IconButtonDefaults.filledIconButtonColors(containerColor = Color.White),
                 modifier = Modifier
-                    .statusBarsPadding()
-                    .padding(8.dp)
+                    .padding(start = 4.dp, top = 8.dp)
                     .clip(CircleShape)
-                    .background(Color.White)
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(R.string.back_button)
+                    contentDescription = stringResource(R.string.back_button),
+                    tint = Color.Black
                 )
             }
             FloatingFavorite(

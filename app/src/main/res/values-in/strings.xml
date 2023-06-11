@@ -68,6 +68,6 @@
     <string name="forgot_password">Lupa Kata Sandi?</string>
     <string name="description_forgot">Silahkan masukkan email anda untuk mereset password</string>
     <string name="confirm_email">Reset</string>
-    <string name="not_found">Halaman Tidak Ditemukan</string>
+    <string name="not_found">Data Tidak Ditemukan</string>
     <string name="password_message">Kami telah mengirimkan email berisi tautan untuk mereset kata sandi</string>
 </resources>

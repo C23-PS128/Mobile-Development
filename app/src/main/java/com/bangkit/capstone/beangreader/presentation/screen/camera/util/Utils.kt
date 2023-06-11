@@ -1,4 +1,4 @@
-package com.bangkit.capstone.beangreader.presentation.screen.scan.util
+package com.bangkit.capstone.beangreader.presentation.screen.camera.util
 
 import android.content.Context
 import android.graphics.Bitmap

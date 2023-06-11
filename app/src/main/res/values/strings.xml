@@ -68,6 +68,6 @@
     <string name="forgot_password">Forgot your password?</string>
     <string name="description_forgot">Please enter your email to reset your password</string>
     <string name="confirm_email">Reset</string>
-    <string name="not_found">Page Not Found</string>
+    <string name="not_found">Data Not Found</string>
     <string name="password_message">We\'ve sent you an email with a link to reset the password</string>
 </resources>

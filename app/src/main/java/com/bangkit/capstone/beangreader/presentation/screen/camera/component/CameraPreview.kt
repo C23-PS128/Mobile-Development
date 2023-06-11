@@ -1,4 +1,4 @@
-package com.bangkit.capstone.beangreader.presentation.screen.scan.component
+package com.bangkit.capstone.beangreader.presentation.screen.camera.component
 
 import android.view.ViewGroup
 import androidx.camera.core.Preview

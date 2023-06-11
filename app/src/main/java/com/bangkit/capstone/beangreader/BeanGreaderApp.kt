@@ -7,11 +7,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.QrCodeScanner
+import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.QrCodeScanner
+import androidx.compose.material.icons.outlined.QrCode
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -36,6 +36,7 @@ import com.bangkit.capstone.beangreader.presentation.screen.about.AboutScreen
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.forgot.ForgotScreen
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.login.LoginScreen
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.register.RegisterScreen
+import com.bangkit.capstone.beangreader.presentation.screen.camera.CameraScreen
 import com.bangkit.capstone.beangreader.presentation.screen.detail.DetailScreen
 import com.bangkit.capstone.beangreader.presentation.screen.favorite.FavoriteScreen
 import com.bangkit.capstone.beangreader.presentation.screen.history.HistoryScreen
@@ -110,6 +111,14 @@ fun BeanGreaderApp(
             }
             composable(Screen.Scan.route) {
                 ScanScreen(
+                    moveToCamera = {
+                        navController.navigate(Screen.Camera.route)
+                    }
+                )
+            }
+            composable(Screen.Camera.route) {
+                CameraScreen(
+                    onImageFiled = {file, isfromcamera ->},
                     onCloseClick = {
                         navController.navigateUp()
                     }
@@ -278,8 +287,8 @@ fun BottomBar(
             ),
             NavigationItem(
                 title = stringResource(R.string.scan),
-                iconActive = Icons.Default.QrCodeScanner,
-                iconNonActive = Icons.Outlined.QrCodeScanner,
+                iconActive = Icons.Default.QrCode,
+                iconNonActive = Icons.Outlined.QrCode,
                 contentScreen = Screen.Scan,
                 contentDescription = "scan_page"
             ),
@@ -333,6 +342,7 @@ private fun String?.shouldShowButtonAppBar(): Boolean {
         Screen.Home.route,
         Screen.History.route,
         Screen.Profile.route,
+        Screen.Scan.route
     )
 }
 
