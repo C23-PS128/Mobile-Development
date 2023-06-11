@@ -70,12 +70,26 @@ class DetailViewModel @Inject constructor(
     private fun getTypesById(id: Int) = viewModelScope.launch {
         beanRepository.getTypesById(id).collect { result ->
             when (result) {
-                is Result.Error -> {}
-                is Result.Loading -> {}
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            error = result.message
+                        )
+                    }
+                }
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
-                            detailResult = result.data
+                            detailResult = result.data,
+                            isLoading = false
                         )
                     }
                 }
@@ -86,12 +100,26 @@ class DetailViewModel @Inject constructor(
     private fun getRoastsById(id: Int) = viewModelScope.launch {
         beanRepository.getRoastsById(id).collect { result ->
             when (result) {
-                is Result.Error -> {}
-                is Result.Loading -> {}
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            error = result.message
+                        )
+                    }
+                }
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
-                            detailResult = result.data
+                            detailResult = result.data,
+                            isLoading = false
                         )
                     }
                 }
@@ -102,11 +130,25 @@ class DetailViewModel @Inject constructor(
     private fun getBrewsById(id: Int) = viewModelScope.launch {
         beanRepository.getBrewsById(id).collect { result ->
             when (result) {
-                is Result.Error -> {}
-                is Result.Loading -> {}
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            error = result.message,
+                            isLoading = false
+                        )
+                    }
+                }
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
+                            isLoading = false,
                             detailResult = result.data
                         )
                     }
@@ -118,11 +160,25 @@ class DetailViewModel @Inject constructor(
     private fun getDrinksById(id: Int) = viewModelScope.launch {
         beanRepository.getDrinksById(id).collect { result ->
             when (result) {
-                is Result.Error -> {}
-                is Result.Loading -> {}
+                is Result.Error -> {
+                    _state.update {
+                        it.copy(
+                            error = result.message,
+                            isLoading = false
+                        )
+                    }
+                }
+                is Result.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = true
+                        )
+                    }
+                }
                 is Result.Success -> {
                     _state.update {
                         it.copy(
+                            isLoading = false,
                             detailResult = result.data
                         )
                     }

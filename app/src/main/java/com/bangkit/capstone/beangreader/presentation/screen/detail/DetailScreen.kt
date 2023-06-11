@@ -1,5 +1,6 @@
 package com.bangkit.capstone.beangreader.presentation.screen.detail
 
+import android.widget.Toast
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -33,6 +35,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
+import com.bangkit.capstone.beangreader.presentation.component.DetailShimmerScreen
 import com.bangkit.capstone.beangreader.presentation.screen.detail.component.FloatingFavorite
 
 @Composable
@@ -47,18 +50,35 @@ fun DetailScreen(
         viewModel.onEvent(DetailEvent.GetDetailType(id, name, type))
     }
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
 
-    state.detailResult?.let {
-        DetailContent(
-            urlImage = "${it.image}",
-            title = "${it.title}",
-            description = "${it.description}",
-            isFav = state.isFav,
-            onFavClick = {
-                viewModel.onEvent(DetailEvent.OnFavClick(!state.isFav, type, state.detailResult))
-            },
-            navigateBack = navigateBack
-        )
+    LaunchedEffect(key1 = state.error) {
+        state.error?.let { error ->
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    if (state.isLoading) {
+        DetailShimmerScreen()
+    } else {
+        state.detailResult?.let {
+            DetailContent(
+                urlImage = "${it.image}",
+                title = "${it.title}",
+                description = "${it.description}",
+                isFav = state.isFav,
+                onFavClick = {
+                    viewModel.onEvent(
+                        DetailEvent.OnFavClick(
+                            !state.isFav,
+                            type,
+                            state.detailResult
+                        )
+                    )
+                },
+                navigateBack = navigateBack
+            )
+        }
     }
 }
 
