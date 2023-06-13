@@ -10,7 +10,7 @@ import com.bangkit.capstone.beangreader.domain.model.Result
 import kotlinx.coroutines.flow.Flow
 
 interface BeanRepository {
-    fun searchBean(query: String): Flow<List<ResultsItem>>
+    fun searchBean(query: String): Flow<Result<List<ResultsItem>>>
 
     fun getTypes(): Flow<Result<List<TypeCoffeeItem>>>
 

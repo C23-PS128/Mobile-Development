@@ -1,6 +1,5 @@
 package com.bangkit.capstone.beangreader.data.repository
 
-import android.util.Log
 import com.bangkit.capstone.beangreader.data.remote.RemoteDataSource
 import com.bangkit.capstone.beangreader.data.remote.response.article.BrewsItem
 import com.bangkit.capstone.beangreader.data.remote.response.article.DetailItem
@@ -20,12 +19,16 @@ class BeanRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : BeanRepository {
 
-    override fun searchBean(query: String): Flow<List<ResultsItem>> = flow {
-        val result = remoteDataSource.getSearch(query).results.filter {
-            Log.d("Searching1", "searchBean: $it")
-            it.title?.contains(query, ignoreCase = true) ?: true
+    override fun searchBean(query: String): Flow<Result<List<ResultsItem>>> = flow {
+        emit(Result.Loading())
+        try {
+            val response = remoteDataSource.getSearch(query).results.filter {
+                it.title?.contains(query, ignoreCase = true) ?: true
+            }
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message))
         }
-        emit(result)
     }
 
     override fun getTypes(): Flow<Result<List<TypeCoffeeItem>>> = flow {

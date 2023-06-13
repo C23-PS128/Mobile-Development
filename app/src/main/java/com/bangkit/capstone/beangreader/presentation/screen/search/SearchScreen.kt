@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.data.remote.response.article.ResultsItem
 import com.bangkit.capstone.beangreader.presentation.component.EmptyScreen
+import com.bangkit.capstone.beangreader.presentation.component.SearchSimmerScreen
 import com.bangkit.capstone.beangreader.presentation.screen.search.component.ListSearchItem
 import com.bangkit.capstone.beangreader.presentation.screen.search.component.SearchBar
 
@@ -41,7 +42,8 @@ fun SearchScreen(
         },
         onClickBack = onClickBack,
         listSearch = state.searchItem,
-        navigateToDetail = navigateToDetail
+        navigateToDetail = navigateToDetail,
+        loading = state.isLoading
     )
 }
 
@@ -51,6 +53,7 @@ fun SearchContent(
     query: String,
     onQueryChange: (String) -> Unit,
     onClickBack: () -> Unit,
+    loading: Boolean,
     listSearch: List<ResultsItem>,
     navigateToDetail: (Int, Int, String) -> Unit,
     modifier: Modifier = Modifier
@@ -87,6 +90,9 @@ fun SearchContent(
             if (listSearch.isEmpty()) {
                 EmptyScreen()
             } else {
+                if (loading) {
+                    SearchSimmerScreen()
+                }
                 LazyColumn(verticalArrangement = Arrangement.Center) {
                     items(listSearch) { item ->
                         ListSearchItem(
@@ -102,3 +108,4 @@ fun SearchContent(
         }
     }
 }
+
