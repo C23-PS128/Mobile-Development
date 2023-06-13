@@ -257,6 +257,13 @@ fun BeanGreaderApp(
                                     inclusive = true
                                 }
                             }
+                        },
+                        navigateToSignUp = {
+                            navController.navigate(Screen.Register.route) {
+                                popUpTo(Screen.Home.route) {
+                                    inclusive = true
+                                }
+                            }
                         }
                     )
                 }

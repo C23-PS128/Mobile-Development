@@ -51,10 +51,20 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun sendPasswordResetEmail(emails: String): Flow<Result<Boolean>> = flow {
+    override suspend fun sendPasswordResetEmail(emails: String): Flow<Result<Boolean>> = flow {
         emit(Result.Loading())
         try {
             firebaseAuth.sendPasswordResetEmail(emails)
+            emit(Result.Success(true))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun revokeAccess(): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading())
+        try {
+            firebaseAuth.revokeAccess()
             emit(Result.Success(true))
         } catch (e: Exception) {
             emit(Result.Error(e.message))

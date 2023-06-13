@@ -6,7 +6,8 @@ import com.bangkit.capstone.beangreader.presentation.screen.authentication.model
 data class MyProfileState(
     val userData: UserData? = null,
     val signInResult: SignInResult? = null,
-    val isSuccess: Boolean = false,
+    val isLogoutSuccess: Boolean = false,
+    val isRevokeSuccess: Boolean = false,
     val isError: String? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
 )

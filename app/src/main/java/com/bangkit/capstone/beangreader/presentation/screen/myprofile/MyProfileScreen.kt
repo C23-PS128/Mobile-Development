@@ -2,6 +2,7 @@ package com.bangkit.capstone.beangreader.presentation.screen.myprofile
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -35,23 +36,46 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.presentation.screen.authentication.model.UserData
+import com.bangkit.capstone.beangreader.presentation.screen.myprofile.component.DialogDeleteScreen
 import com.bangkit.capstone.beangreader.presentation.screen.myprofile.component.ListMenuItem
 
 @Composable
 fun MyProfileScreen(
     onBackClick: () -> Unit,
     navigateToLogin: () -> Unit,
+    navigateToSignUp: () -> Unit,
     viewModel: MyProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
-    LaunchedEffect(key1 = state.isSuccess) {
-        if (state.isSuccess) {
+    LaunchedEffect(key1 = state.isLogoutSuccess) {
+        if (state.isLogoutSuccess) {
             navigateToLogin()
             Toast.makeText(context, context.getString(R.string.logout_success), Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    LaunchedEffect(key1 = state.isRevokeSuccess) {
+        if (state.isRevokeSuccess) {
+            navigateToSignUp()
+            Toast.makeText(context, "Akun berhasil dihapus, Silahkan buat akun yang baru", Toast.LENGTH_SHORT).show()
+            viewModel.resetState()
+            viewModel.isDialogCancel()
+        }
+    }
+
+    if (viewModel.isDialogShown) {
+        DialogDeleteScreen(
+            onDismiss = {
+                viewModel.isDialogCancel()
+            },
+            onConfirm = {
+                viewModel.revokeAccess()
+            },
+            loading = state.isLoading
+        )
     }
 
     MyProfileContent(
@@ -59,6 +83,9 @@ fun MyProfileScreen(
         userData = state.userData,
         onLogoutClick = {
             viewModel.logout()
+        },
+        revokeClick = {
+            viewModel.isDialogShown()
         }
     )
 }
@@ -69,6 +96,7 @@ fun MyProfileContent(
     userData: UserData?,
     onBackClick: () -> Unit,
     onLogoutClick: () -> Unit,
+    revokeClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var openMenu by remember { mutableStateOf(false) }
@@ -98,7 +126,8 @@ fun MyProfileContent(
                             expanded = openMenu,
                             onDismissRequest = {
                                 openMenu = !openMenu
-                            }
+                            },
+                            modifier = Modifier.fillMaxWidth(0.5f)
                         ) {
                             DropdownMenuItem(
                                 text = {
@@ -116,7 +145,7 @@ fun MyProfileContent(
                                         style = MaterialTheme.typography.bodyLarge
                                     )
                                 },
-                                onClick = { /*TODO*/ }
+                                onClick = revokeClick
                             )
                         }
                     }

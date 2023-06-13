@@ -77,4 +77,7 @@
     <string name="title_scan">Scan Biji Kopimu!</string>
     <string name="upload">Unggah</string>
     <string name="loading_desc">Sedang memproses gambar\nSilahkan tunggu…</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="cancel">Batal</string>
+    <string name="deleted_confirm">Apakah anda yakin, untuk menghapus akun ini?</string>
 </resources>

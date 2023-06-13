@@ -87,6 +87,10 @@ class FireBaseAuthImpl @Inject constructor(
         auth.signOut()
     }
 
+    override suspend fun revokeAccess() {
+        auth.currentUser?.delete()?.await()
+    }
+
     override suspend fun getSignedUser(): UserData? = auth.currentUser?.run {
         UserData(
             userId = uid,

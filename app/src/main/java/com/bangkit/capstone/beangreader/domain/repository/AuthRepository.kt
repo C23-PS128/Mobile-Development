@@ -10,7 +10,8 @@ interface AuthRepository {
     fun login(emails: String, password: String): Flow<Result<SignInResult>>
     fun register(name: String, emails: String, password: String): Flow<Result<SignInResult>>
     fun signInWithIntent(intent: Intent): Flow<Result<SignInResult>>
-    fun sendPasswordResetEmail(emails: String): Flow<Result<Boolean>>
+    suspend fun sendPasswordResetEmail(emails: String): Flow<Result<Boolean>>
+    suspend fun revokeAccess(): Flow<Result<Boolean>>
     fun getSignedUser(): Flow<UserData?>
     suspend fun signOut()
 }

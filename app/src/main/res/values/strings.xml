@@ -77,4 +77,7 @@
     <string name="description_scan">Please upload photos of your coffee beans, to determine the quality of the coffee beans</string>
     <string name="title_scan">Scan your coffee beans!</string>
     <string name="loading_desc">Processing images\nPlease wait…</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="deleted_confirm">Are you sure, to delete this account?</string>
 </resources>
