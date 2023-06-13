@@ -70,4 +70,11 @@
     <string name="confirm_email">Reset</string>
     <string name="not_found">Data Tidak Ditemukan</string>
     <string name="password_message">Kami telah mengirimkan email berisi tautan untuk mereset kata sandi</string>
+    <string name="delete_account">Hapus Akun</string>
+    <string name="moisture">Kadar air</string>
+    <string name="message">Pesan</string>
+    <string name="description_scan">Silahkan unggah foto biji kopi anda, untuk mengetahui kualitas biji kopi tersebut</string>
+    <string name="title_scan">Scan Biji Kopimu!</string>
+    <string name="upload">Unggah</string>
+    <string name="loading_desc">Sedang memproses gambar\nSilahkan tunggu…</string>
 </resources>

@@ -3,7 +3,7 @@ package com.bangkit.capstone.beangreader.presentation.screen.authentication.logi
 import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bangkit.capstone.beangreader.data.repository.auth.AuthRepository
+import com.bangkit.capstone.beangreader.domain.repository.AuthRepository
 import com.bangkit.capstone.beangreader.domain.model.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

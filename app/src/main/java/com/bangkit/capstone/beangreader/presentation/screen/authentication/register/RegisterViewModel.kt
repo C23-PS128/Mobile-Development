@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.capstone.beangreader.domain.model.Result
-import com.bangkit.capstone.beangreader.data.repository.auth.AuthRepository
+import com.bangkit.capstone.beangreader.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -2,9 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
-    id 'de.undercouch.download'
 }
 
 android {
@@ -47,9 +47,6 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
-    }
-    androidResources {
-        noCompress 'tflite'
     }
 }
 
@@ -132,9 +129,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.6.1'
-
-    //tensorflow
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.4.0'
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0'
-    implementation 'org.tensorflow:tensorflow-lite-gpu:2.9.0'
 }

@@ -1,7 +1,6 @@
 package com.bangkit.capstone.beangreader.presentation.screen.home
 
 import android.widget.Toast
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,7 +24,7 @@ import com.bangkit.capstone.beangreader.data.remote.response.article.DrinksItem
 import com.bangkit.capstone.beangreader.data.remote.response.article.RoastsItem
 import com.bangkit.capstone.beangreader.data.remote.response.article.TypeCoffeeItem
 import com.bangkit.capstone.beangreader.presentation.component.HomeSimmerScreen
-import com.bangkit.capstone.beangreader.presentation.screen.home.component.ImageSlider
+import com.bangkit.capstone.beangreader.presentation.screen.home.component.ImageBanner
 import com.bangkit.capstone.beangreader.presentation.screen.home.component.ListBrewsItem
 import com.bangkit.capstone.beangreader.presentation.screen.home.component.ListDrinkItem
 import com.bangkit.capstone.beangreader.presentation.screen.home.component.ListRoastsItem
@@ -34,10 +33,11 @@ import com.bangkit.capstone.beangreader.presentation.screen.home.component.Searc
 
 @Composable
 fun HomeScreen(
+    navigateToSearch: () -> Unit,
+    moveToScan: () -> Unit,
+    navigateToDetail: (Int, String, Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateToSearch: () -> Unit,
-    navigateToDetail: (Int, String, Int) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -58,20 +58,19 @@ fun HomeScreen(
             drinksItem = state.listDrinks,
             navigateToSearch = navigateToSearch,
             navigateToDetail = navigateToDetail,
-            bannerImages = state.listBannerImages,
+            moveToScan = moveToScan,
             modifier = modifier
         )
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeContent(
     typesItem: List<TypeCoffeeItem>,
     roastsItem: List<RoastsItem>,
     brewsItem: List<BrewsItem>,
     drinksItem: List<DrinksItem>,
-    bannerImages: List<String>,
+    moveToScan: () -> Unit,
     navigateToSearch: () -> Unit,
     navigateToDetail: (Int, String, Int) -> Unit,
     modifier: Modifier = Modifier,
@@ -86,9 +85,7 @@ fun HomeContent(
             modifier = Modifier
                 .fillMaxWidth()
         )
-        ImageSlider(
-            pagerImages = bannerImages
-        )
+        ImageBanner(moveToScan = moveToScan)
         Text(
             text = stringResource(R.string.type),
             style = MaterialTheme.typography.titleMedium,

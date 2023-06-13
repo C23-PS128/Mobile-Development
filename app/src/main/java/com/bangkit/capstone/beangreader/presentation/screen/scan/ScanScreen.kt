@@ -13,10 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.ui.theme.BeanGreaderTheme
 
 
@@ -42,14 +43,13 @@ fun ScanContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Scan Biji Kopimu!",
+                text = stringResource(R.string.title_scan),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.padding(16.dp)
             )
             Text(
-                text = "Silahkan klik \"Scan\", untuk mendeteksi biji kopi anda",
-                textAlign = TextAlign.Center,
+                text = stringResource(R.string.description_scan),
                 modifier = Modifier.padding(16.dp)
             )
             Spacer(modifier = Modifier.height(400.dp))
@@ -60,7 +60,7 @@ fun ScanContent(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = "Scan",
+                    text = stringResource(R.string.upload),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }

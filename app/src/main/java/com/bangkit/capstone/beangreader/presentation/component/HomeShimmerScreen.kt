@@ -8,7 +8,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +19,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.Composable
@@ -80,7 +78,7 @@ fun HomeSimmerContent(
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .size(64.dp)
+                    .size(48.dp)
                     .padding(horizontal = 16.dp)
                     .clip(ShapeDefaults.ExtraLarge)
                     .background(brush)
@@ -94,34 +92,7 @@ fun HomeSimmerContent(
                     .clip(ShapeDefaults.Medium)
                     .background(brush)
             )
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth()
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .clip(CircleShape)
-                        .background(brush)
-                )
-                Spacer(modifier = Modifier.padding(2.dp))
-                Spacer(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .clip(CircleShape)
-                        .background(brush)
-                )
-                Spacer(modifier = Modifier.padding(2.dp))
-                Spacer(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .clip(CircleShape)
-                        .background(brush)
-                )
-            }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(32.dp))
             Spacer(
                 modifier = Modifier
                     .width(156.dp)

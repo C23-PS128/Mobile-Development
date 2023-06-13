@@ -1,8 +1,8 @@
 package com.bangkit.capstone.beangreader.di
 
 import android.content.Context
-import com.bangkit.capstone.beangreader.data.repository.firebase.FireBaseAuth
-import com.bangkit.capstone.beangreader.data.repository.firebase.FireBaseAuthImpl
+import com.bangkit.capstone.beangreader.domain.repository.FireBaseAuth
+import com.bangkit.capstone.beangreader.data.repository.FireBaseAuthImpl
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import dagger.Binds

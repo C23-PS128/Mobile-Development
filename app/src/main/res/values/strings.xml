@@ -70,4 +70,11 @@
     <string name="confirm_email">Reset</string>
     <string name="not_found">Data Not Found</string>
     <string name="password_message">We\'ve sent you an email with a link to reset the password</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="moisture">Moisture</string>
+    <string name="message">Message</string>
+    <string name="upload">Upload</string>
+    <string name="description_scan">Please upload photos of your coffee beans, to determine the quality of the coffee beans</string>
+    <string name="title_scan">Scan your coffee beans!</string>
+    <string name="loading_desc">Processing images\nPlease wait…</string>
 </resources>

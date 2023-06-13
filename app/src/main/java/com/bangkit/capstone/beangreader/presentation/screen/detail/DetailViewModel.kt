@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.capstone.beangreader.data.local.entity.FavoriteEntity
 import com.bangkit.capstone.beangreader.domain.model.Result
-import com.bangkit.capstone.beangreader.data.repository.bean.BeanRepository
-import com.bangkit.capstone.beangreader.data.repository.favorite.FavoriteRepository
+import com.bangkit.capstone.beangreader.domain.repository.BeanRepository
+import com.bangkit.capstone.beangreader.domain.repository.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

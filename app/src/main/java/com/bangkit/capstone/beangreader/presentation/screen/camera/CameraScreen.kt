@@ -40,21 +40,54 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.bangkit.capstone.beangreader.data.remote.response.detection.DetectionResponse
 import com.bangkit.capstone.beangreader.presentation.screen.camera.component.CameraPreview
-import com.bangkit.capstone.beangreader.presentation.screen.camera.util.executor
-import com.bangkit.capstone.beangreader.presentation.screen.camera.util.getCameraProvider
-import com.bangkit.capstone.beangreader.presentation.screen.camera.util.takePicture
-import com.bangkit.capstone.beangreader.presentation.screen.camera.util.toFile
+import com.bangkit.capstone.beangreader.presentation.screen.camera.component.CustomLoading
+import com.bangkit.capstone.beangreader.util.executor
+import com.bangkit.capstone.beangreader.util.getCameraProvider
+import com.bangkit.capstone.beangreader.util.takePicture
+import com.bangkit.capstone.beangreader.util.toFile
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionRequired
 import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.launch
 import java.io.File
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraScreen(
-    onImageFiled: (File, isFromCamera: Boolean) -> Unit,
+    onCloseClick: () -> Unit,
+    moveToResult: (response: DetectionResponse) -> Unit,
+    viewModel: CameraViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(state.success) {
+        if (state.success) {
+            state.result?.let {
+                moveToResult(it)
+                viewModel.resetState()
+            }
+        }
+    }
+
+    if (state.loading) {
+        CustomLoading()
+    }
+
+    CameraContent(
+        onImageFiled = { file ->
+            viewModel.uploadImage(file)
+        },
+        onCloseClick = onCloseClick
+    )
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun CameraContent(
+    onImageFiled: (File) -> Unit,
     onCloseClick: () -> Unit,
     modifier: Modifier = Modifier,
     cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
@@ -69,7 +102,7 @@ fun CameraScreen(
         onResult = { uri ->
             if (uri != null) {
                 coroutineScope.launch {
-                    onImageFiled(uri.toFile(context), false)
+                    onImageFiled(uri.toFile(context))
                 }
             }
         }
@@ -79,9 +112,10 @@ fun CameraScreen(
         permissionState.launchPermissionRequest()
     }
 
-    Box(modifier = modifier
-        .fillMaxSize()
-        .consumeWindowInsets(WindowInsets.systemBars.only(WindowInsetsSides.Vertical))
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .consumeWindowInsets(WindowInsets.systemBars.only(WindowInsetsSides.Vertical))
     ) {
         PermissionRequired(
             permissionState = permissionState,
@@ -124,8 +158,7 @@ fun CameraScreen(
                         coroutineScope.launch {
                             try {
                                 onImageFiled(
-                                    imageCaptureUseCase.takePicture(context.executor),
-                                    true
+                                    imageCaptureUseCase.takePicture(context.executor)
                                 )
                             } catch (e: Exception) {
                                 e.printStackTrace()

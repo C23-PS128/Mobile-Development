@@ -23,7 +23,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -72,7 +71,7 @@ fun DetailShimmerContent(
         Spacer(
             modifier = Modifier
                 .width(164.dp)
-                .height(40.dp)
+                .height(32.dp)
                 .clip(ShapeDefaults.Small)
                 .align(Alignment.CenterHorizontally)
                 .background(brush)
@@ -154,18 +153,4 @@ fun DetailShimmerContent(
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ShimmerHomePreview() {
-    DetailShimmerContent(
-        brush = Brush.linearGradient(
-            listOf(
-                Color.LightGray.copy(alpha = 0.6f),
-                Color.LightGray.copy(alpha = 0.2f),
-                Color.LightGray.copy(alpha = 0.6f),
-            )
-        )
-    )
 }

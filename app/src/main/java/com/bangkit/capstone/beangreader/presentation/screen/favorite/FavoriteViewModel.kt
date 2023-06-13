@@ -3,7 +3,7 @@ package com.bangkit.capstone.beangreader.presentation.screen.favorite
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bangkit.capstone.beangreader.data.repository.favorite.FavoriteRepository
+import com.bangkit.capstone.beangreader.domain.repository.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

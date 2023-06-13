@@ -1,15 +1,17 @@
 package com.bangkit.capstone.beangreader.di
 
-import com.bangkit.capstone.beangreader.data.repository.auth.AuthRepository
-import com.bangkit.capstone.beangreader.data.repository.auth.AuthRepositoryImpl
-import com.bangkit.capstone.beangreader.data.repository.bean.BeanRepository
-import com.bangkit.capstone.beangreader.data.repository.bean.BeanRepositoryImpl
-import com.bangkit.capstone.beangreader.data.repository.favorite.FavoriteRepository
-import com.bangkit.capstone.beangreader.data.repository.favorite.FavoriteRepositoryImpl
-import com.bangkit.capstone.beangreader.data.repository.setting.SettingRepository
-import com.bangkit.capstone.beangreader.data.repository.setting.SettingRepositoryImpl
-import com.bangkit.capstone.beangreader.data.repository.user.UserRepository
-import com.bangkit.capstone.beangreader.data.repository.user.UserRepositoryImpl
+import com.bangkit.capstone.beangreader.domain.repository.AuthRepository
+import com.bangkit.capstone.beangreader.data.repository.AuthRepositoryImpl
+import com.bangkit.capstone.beangreader.domain.repository.BeanRepository
+import com.bangkit.capstone.beangreader.data.repository.BeanRepositoryImpl
+import com.bangkit.capstone.beangreader.data.repository.DetectionRepositoryImpl
+import com.bangkit.capstone.beangreader.domain.repository.FavoriteRepository
+import com.bangkit.capstone.beangreader.data.repository.FavoriteRepositoryImpl
+import com.bangkit.capstone.beangreader.domain.repository.SettingRepository
+import com.bangkit.capstone.beangreader.data.repository.SettingRepositoryImpl
+import com.bangkit.capstone.beangreader.domain.repository.UserRepository
+import com.bangkit.capstone.beangreader.data.repository.UserRepositoryImpl
+import com.bangkit.capstone.beangreader.domain.repository.DetectionRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -38,4 +40,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideAuthRepository(authRepositoryImpl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideDetectRepository(detectionRepositoryImpl: DetectionRepositoryImpl): DetectionRepository
 }
