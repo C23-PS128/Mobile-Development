@@ -4,11 +4,11 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCode
-import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.QrCode
@@ -42,7 +42,6 @@ import com.bangkit.capstone.beangreader.presentation.screen.camera.CameraScreen
 import com.bangkit.capstone.beangreader.presentation.screen.detail.DetailScreen
 import com.bangkit.capstone.beangreader.presentation.screen.detectresult.DetectResultScreen
 import com.bangkit.capstone.beangreader.presentation.screen.favorite.FavoriteScreen
-import com.bangkit.capstone.beangreader.presentation.screen.history.HistoryScreen
 import com.bangkit.capstone.beangreader.presentation.screen.home.HomeScreen
 import com.bangkit.capstone.beangreader.presentation.screen.myprofile.MyProfileScreen
 import com.bangkit.capstone.beangreader.presentation.screen.onboarding.OnBoardingScreen
@@ -121,9 +120,6 @@ fun BeanGreaderApp(
                         navController.navigate(Screen.Detail.createRoute(id, title, type))
                     }
                 )
-            }
-            composable(Screen.History.route) {
-                HistoryScreen()
             }
             navigation(
                 startDestination = "on-boarding",
@@ -238,9 +234,6 @@ fun BeanGreaderApp(
                 }
                 composable(Screen.Favorite.route) {
                     FavoriteScreen(
-                        onBackClick = {
-                            navController.navigateUp()
-                        },
                         navigateToDetail = { id, title, type ->
                             navController.navigate(Screen.Detail.createRoute(id, title, type))
                         }
@@ -274,9 +267,6 @@ fun BeanGreaderApp(
                         },
                         onClickSetting = {
                             navController.navigate(Screen.Setting.route)
-                        },
-                        onClickFavorite = {
-                            navController.navigate(Screen.Favorite.route)
                         },
                         onClickAbout = {
                             navController.navigate(Screen.About.route)
@@ -341,10 +331,10 @@ fun BottomBar(
                 contentDescription = "scan_page"
             ),
             NavigationItem(
-                title = stringResource(R.string.history),
-                iconActive = Icons.Default.History,
-                iconNonActive = Icons.Outlined.History,
-                contentScreen = Screen.History,
+                title = stringResource(R.string.favorite),
+                iconActive = Icons.Default.Favorite,
+                iconNonActive = Icons.Default.FavoriteBorder,
+                contentScreen = Screen.Favorite,
                 contentDescription = "history_page"
             ),
             NavigationItem(
@@ -389,7 +379,7 @@ private fun String?.shouldShowButtonAppBar(): Boolean {
     return this in setOf(
         Screen.Home.route,
         Screen.Scan.route,
-        Screen.History.route,
+        Screen.Favorite.route,
         Screen.Profile.route,
     )
 }

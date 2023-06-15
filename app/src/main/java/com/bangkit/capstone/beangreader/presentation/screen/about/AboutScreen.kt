@@ -1,5 +1,6 @@
 package com.bangkit.capstone.beangreader.presentation.screen.about
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,12 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.ui.theme.BeanGreaderTheme
 
@@ -69,8 +70,8 @@ fun AboutContent(
                 .padding(it)
                 .verticalScroll(scrollState)
         ) {
-            AsyncImage(
-                model = "https://cdn2.iconfinder.com/data/icons/coffee-store/64/coffee-11-1024.png",
+            Image(
+                painterResource(id = R.drawable.splashbean),
                 contentDescription = stringResource(R.string.app_name),
                 modifier = Modifier
                     .size(144.dp)

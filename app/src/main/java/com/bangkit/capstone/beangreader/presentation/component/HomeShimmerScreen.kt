@@ -78,11 +78,12 @@ fun HomeSimmerContent(
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .size(48.dp)
+                    .height(56.dp)
                     .padding(horizontal = 16.dp)
                     .clip(ShapeDefaults.ExtraLarge)
                     .background(brush)
             )
+            Spacer(modifier = Modifier.height(24.dp))
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()

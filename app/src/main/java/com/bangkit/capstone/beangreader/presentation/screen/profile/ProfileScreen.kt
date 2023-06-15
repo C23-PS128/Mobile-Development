@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
@@ -32,7 +31,6 @@ import com.bangkit.capstone.beangreader.presentation.screen.profile.component.Li
 fun ProfileScreen(
     onClickMyProfile: () -> Unit,
     onClickSetting: () -> Unit,
-    onClickFavorite: () -> Unit,
     onClickAbout: () -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
@@ -41,7 +39,6 @@ fun ProfileScreen(
     ProfileContent(
         onClickMyProfile = onClickMyProfile,
         onClickSetting = onClickSetting,
-        onClickFavorite = onClickFavorite,
         onClickAbout = onClickAbout,
         userData = state.userData
     )
@@ -51,7 +48,6 @@ fun ProfileScreen(
 fun ProfileContent(
     onClickMyProfile: () -> Unit,
     onClickSetting: () -> Unit,
-    onClickFavorite: () -> Unit,
     onClickAbout: () -> Unit,
     userData: UserData?,
     modifier: Modifier = Modifier
@@ -93,7 +89,6 @@ fun ProfileContent(
         }
         ListMenuProfile(
             onClickMyProfile = onClickMyProfile,
-            onClickFavorite = onClickFavorite,
             onClickSetting = onClickSetting,
             onClickAbout = onClickAbout
         )
@@ -104,7 +99,6 @@ fun ProfileContent(
 fun ListMenuProfile(
     modifier: Modifier = Modifier,
     onClickMyProfile: () -> Unit,
-    onClickFavorite: () -> Unit,
     onClickSetting: () -> Unit,
     onClickAbout: () -> Unit,
 ) {
@@ -114,12 +108,6 @@ fun ListMenuProfile(
             imageVector = Icons.Outlined.Person,
             contentDescription = stringResource(R.string.icon_person),
             onCLick = onClickMyProfile
-        )
-        ListMenu(
-            text = stringResource(R.string.favorite),
-            imageVector = Icons.Outlined.FavoriteBorder,
-            contentDescription = stringResource(R.string.favorite),
-            onCLick = onClickFavorite
         )
         ListMenu(
             text = stringResource(R.string.setting),

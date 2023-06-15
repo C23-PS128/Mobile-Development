@@ -167,7 +167,7 @@ fun MyProfileContent(
                         .padding(bottom = 32.dp)
                         .align(Alignment.CenterHorizontally)
                         .clip(CircleShape)
-                        .size(144.dp)
+                        .size(128.dp)
                 )
             } else {
                 AsyncImage(

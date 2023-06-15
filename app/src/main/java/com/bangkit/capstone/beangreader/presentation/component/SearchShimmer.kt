@@ -80,7 +80,7 @@ fun ListItemShimmer(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .padding(8.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
             .fillMaxWidth()
     ) {
         Spacer(modifier = Modifier
@@ -91,6 +91,7 @@ fun ListItemShimmer(
         Spacer(modifier = Modifier
             .height(16.dp)
             .padding(start = 16.dp)
+            .clip(MaterialTheme.shapes.small)
             .fillMaxWidth(0.4f)
             .background(brush)
         )
