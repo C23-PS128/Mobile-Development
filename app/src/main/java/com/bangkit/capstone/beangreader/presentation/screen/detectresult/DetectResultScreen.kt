@@ -74,8 +74,8 @@ fun DetectResultContent(
                 alignment = Alignment.Center,
                 modifier = Modifier
                     .padding(bottom = 16.dp)
-                    .clip(ShapeDefaults.Medium)
                     .height(250.dp)
+                    .clip(ShapeDefaults.Medium)
             )
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(stringResource(R.string.moisture), modifier = Modifier.width(72.dp))
