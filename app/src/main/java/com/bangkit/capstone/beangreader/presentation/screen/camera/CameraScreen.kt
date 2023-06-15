@@ -2,6 +2,7 @@ package com.bangkit.capstone.beangreader.presentation.screen.camera
 
 import android.Manifest
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -62,13 +63,21 @@ fun CameraScreen(
     viewModel: CameraViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
 
     LaunchedEffect(state.success) {
         if (state.success) {
             state.result?.let {
                 moveToResult(it)
                 viewModel.resetState()
+                Toast.makeText(context, "Foto berhasil di proses", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    LaunchedEffect(key1 = state.error) {
+        state.error?.let { error ->
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
         }
     }
 

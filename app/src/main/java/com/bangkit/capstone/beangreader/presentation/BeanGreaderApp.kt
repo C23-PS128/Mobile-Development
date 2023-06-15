@@ -213,7 +213,10 @@ fun BeanGreaderApp(
                     DetectResultScreen(
                         image = state?.userImage ?: "",
                         moisture = state?.labels ?: "",
-                        description = state?.pesanKualitas ?: ""
+                        description = state?.pesanKualitas ?: "",
+                        onBackPressed = {
+                            navController.navigateUp()
+                        }
                     )
                 }
             }
