@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bangkit.capstone.beangreader.R
 import com.bangkit.capstone.beangreader.ui.theme.BeanGreaderTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 
 @Composable
@@ -31,6 +33,14 @@ fun SplashScreen(
 ) {
     val isLoggedIn by viewModel.isLoggedIn
     val currentOnTimeOut by rememberUpdatedState(onTimeOut)
+    val systemUiController = rememberSystemUiController()
+
+    DisposableEffect(key1 = true){
+        systemUiController.isStatusBarVisible = false
+        onDispose {
+            systemUiController.isStatusBarVisible = true
+        }
+    }
 
     var startAnimation by remember { mutableStateOf(false) }
     val alphaAnim = animateFloatAsState(

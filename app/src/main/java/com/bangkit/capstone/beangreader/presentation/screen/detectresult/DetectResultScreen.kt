@@ -87,7 +87,7 @@ fun DetectResultContent(
             }
             Spacer(Modifier.height(16.dp))
             Row(modifier = Modifier.fillMaxWidth()) {
-                Text(stringResource(R.string.message), modifier = Modifier.width(72.dp))
+                Text(stringResource(R.string.description), modifier = Modifier.width(72.dp))
                 Text(text = ":", modifier = Modifier.padding(horizontal = 8.dp))
                 Text(
                     text = description,

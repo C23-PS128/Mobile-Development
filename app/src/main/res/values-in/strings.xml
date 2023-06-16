@@ -80,4 +80,5 @@
     <string name="confirm">Konfirmasi</string>
     <string name="cancel">Batal</string>
     <string name="deleted_confirm">Apakah anda yakin, untuk menghapus akun ini?</string>
+    <string name="description">Deskripsi</string>
 </resources>

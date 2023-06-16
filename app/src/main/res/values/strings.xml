@@ -80,4 +80,5 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="deleted_confirm">Are you sure, to delete this account?</string>
+    <string name="description">Description</string>
 </resources>
