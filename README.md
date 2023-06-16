@@ -64,13 +64,21 @@ In the Bean Greader application there are several features:
 
 <table>
     <tr>
-        <td><img src="screenshot/github.gif" align="center" alt="4"</td>
-        <td><img src="screenshot/splash.jpg" align="center" alt="4"</td>
-        <td><img src="screenshot/home.jpg" align="center" alt="4"</td>
+        <td><img src="screenshot/1 Splash.png" align="center" alt="4"</td>
+        <td><img src="screenshot/2 Home.png" align="center" alt="4"</td>
+        <td><img src="screenshot/3 Search.png" align="center" alt="4"</td>
+        <td><img src="screenshot/4 Detail.png" align="center" alt="4"</td>
     </tr>
     <tr>
-        <td><img src="screenshot/followers.jpg" align="center" alt="4"</td>
-        <td><img src="screenshot/following.jpg" align="center" alt="4"</td>
-        <td><img src="screenshot/search.jpg" align="center" alt="4"</td>
+        <td><img src="screenshot/5 Scan Screen.png" align="center" alt="4"</td>
+        <td><img src="screenshot/6 Upload.png" align="center" alt="4"</td>
+        <td><img src="screenshot/7 Loading Detect.png" align="center" alt="4"</td>
+        <td><img src="screenshot/8 Result Detect.png" align="center" alt="4"</td>
+    </tr>
+    <tr>
+        <td><img src="screenshot/9 Favorite.png" align="center" alt="4"</td>
+        <td><img src="screenshot/10 Profile Screen.png" align="center" alt="4"</td>
+        <td><img src="screenshot/11 My Profile.png" align="center" alt="4"</td>
+        <td><img src="screenshot/12 Setting.png" align="center" alt="4"</td>
     </tr>
 <table>
