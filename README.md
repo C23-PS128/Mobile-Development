@@ -1,3 +1,5 @@
+<p align="center"><img src="screenshot/banner-repository.png"/></p>
+
 # Mobile Development
 Here is the Mobile Development repository of the Bean Greader application. Application to find information about coffee and know the quality of coffee beans.
 
