@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "505766495874",
+    "project_id": "c23-ps128",
+    "storage_bucket": "c23-ps128.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505766495874:android:29aeeb6b25e704f839969b",
+        "android_client_info": {
+          "package_name": "com.bangkit.capstone.beangreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505766495874-dr85iqquj83h8j5ai1usiktc7vs9a1gu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bangkit.capstone.beangreader",
+            "certificate_hash": "cd9f4d12bc7fb14eed4f4301ab20ea7fbf36dc6b"
+          }
+        },
+        {
+          "client_id": "505766495874-9hgtepftu2t0vpiot38r9attubr6ffft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4bGWB46LpxJse3E10dBdmp55nAvdPXnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505766495874-9hgtepftu2t0vpiot38r9attubr6ffft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

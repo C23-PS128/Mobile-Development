@@ -6,4 +6,8 @@ interface SettingPreferences {
     fun getThemeSetting(): Flow<Boolean>
 
     suspend fun saveThemeSetting(isDarkMode: Boolean)
+
+    fun getStatusLogin(): Flow<Boolean>
+
+    suspend fun saveStatusLogin(isLogin: Boolean)
 }
